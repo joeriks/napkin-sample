@@ -1,0 +1,139 @@
+// do not use result cache, nor line and column tracking
+/* sample:
+
+Project
+  Id :key
+  Name
+   Write project name:label
+   You need to state the project name:err
+  Address
+  SomeValue :num
+
+
+The idea is to create a json that is easy to use for code generation later.
+
+
+*/
+
+{ var indentStack = [], indent = ""; }
+
+start
+  = cmds:(__ cmd:COMMAND __ EOL? {return cmd;})* ns:(__ ns:NAMESPACE __ {return ns;})+    {return {commands:cmds, model:ns}}
+
+NAMESPACEHEAD = c:[a-zA-Z.]+ " "* {return c.join("");}
+
+COMMAND
+  = code:(REF/PROCESS/GENERATE/OUT) {return code;}
+
+REF
+  = "/ref"i " "* text:StringLiteral " "* attachAs:Literal EOL+ {return {type:"ref", file:text, attachAs: attachAs};}
+
+OUT
+  = "/out"i " "* text:StringLiteral EOL+ {return {type:"out", file:text};}
+
+PROCESS
+  = "/process"i " "* text:StringLiteral " "* out:StringLiteral EOL+ {return {type: "process",file:text, out:out};}
+
+GENERATE
+  = "/generate"i " "* text:StringLiteral " "* out:StringLiteral EOL+ {return {type: "generate",file:text, out:out};}
+
+NAMESPACE
+  = SAMEDENT type:(!EOL namespaceHead:NAMESPACEHEAD {return {type:"namespace", "name":namespaceHead}}) __ 
+    children:( INDENT c:TYPE* __ DEDENT { return c; })?
+    { 
+    
+      if (children) type["types"]=children;
+    
+      return type; }
+
+TYPEHEAD = c:[a-zA-Z]+ " "* {return c.join("");}
+
+TYPE
+  = SAMEDENT type:(!EOL typeHead:TYPEHEAD {return {"name":typeHead}}) __ 
+    children:( INDENT c:MEMBER* __ DEDENT { return c; })?
+    { 
+    
+      if (children) type["members"]=children;
+    
+      return type; }
+      
+
+MEMBERHEAD = c:[a-zA-Z]+ " "* t:(":" t:MEMBERTYPE{return t})? {console.log("memberhead");return {name:c.join(""),type:t==null?"string":t}}
+ 
+MEMBERTYPE = type:('key'/'number'/'string') {return type;}
+
+
+MEMBER
+  = SAMEDENT memberHead:(!EOL memberhead:MEMBERHEAD {return memberhead}) __ 
+    details:( INDENT c:DETAIL* DEDENT { return c; })?  
+    { 
+    
+    if (details) {
+		for (var d in details) {
+			if (details[d].type) {
+				memberHead[details[d].type] = details[d].name;
+			} else {
+				memberHead["col_"+d] = details[d].name;
+			}
+		}
+		memberHead["details"] = details; 
+	}
+    
+    return memberHead }
+
+DETAIL
+  = SAMEDENT detailHead:(!EOL detailHead:DETAILHEAD {return detailHead}) EOL?     
+  {console.log("detailhead");return detailHead;}
+
+DETAILHEAD = c:StringLiteral t:(":" t:DETAILTYPE{return t})? EOL {return {name:c,type:t}}
+ 
+DETAILTYPE = typechar:[a-z]* {return typechar.join("");}
+
+Literal = c:[a-zA-Z ]* {return c.join("");}
+SomeText = "\"" c:[a-zA-Z ]* "\"" {return c.join("");}
+
+StringLiteral "string"
+  = parts:('"' DoubleStringCharacters? '"' / "'" SingleStringCharacters? "'") {
+      return parts[1];
+    }
+
+DoubleStringCharacters
+  = chars:DoubleStringCharacter+ { return chars.join(""); }
+
+SingleStringCharacters
+  = chars:SingleStringCharacter+ { return chars.join(""); }
+
+DoubleStringCharacter
+  = !('"' / "\\" / LineTerminator) char_:. { return char_;     }
+  / "\\" 
+
+SingleStringCharacter
+  = !("'" / "\\" / LineTerminator) char_:. { return char_;     }
+  / "\\" 
+
+LineTerminator
+  = [\n\r\u2028\u2029]
+__
+ = (" " / MULTILINECOMMENT / EOL)*
+
+MULTILINECOMMENT
+  = "/*" (!"*/" .)* "*/"
+
+EOL
+  = ([ \t]*) ("\r\n" / "\n" / "\r")
+
+SAMEDENT
+  = i:[ \t]* &{ return i.join("") === indent; }
+
+INDENT
+  = i:[ \t]+ &{ return i.length > indent.length; }
+    { 
+    
+      indentStack.push(indent); 
+      indent = i.join(""); 
+      peg$currPos = offset(); 
+    
+    }
+
+DEDENT
+  = { indent = indentStack.pop(); }

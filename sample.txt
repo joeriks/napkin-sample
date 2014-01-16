@@ -1,0 +1,25 @@
+/*
+
+	Using DSL syntax version 2014-01-01
+
+*/
+
+
+Acme
+
+	Project
+		Id:key
+			"Identity"
+		Name
+			"Name of project"
+			"Helptext"
+		Address
+			"Full address"
+			"Street 123"
+		City
+		
+
+	Person
+		Id:key
+		Name
+		PhoneNumber

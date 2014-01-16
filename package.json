@@ -1,0 +1,17 @@
+{
+  "name": "napkinsample",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-peg": "~1.1.0"
+  }
+}
