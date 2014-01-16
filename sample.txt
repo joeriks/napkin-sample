@@ -8,7 +8,7 @@
 Acme
 
 	Project
-		Id:key
+		Id
 			"Identity"
 		Name
 			"Name of project"
@@ -20,6 +20,6 @@ Acme
 		
 
 	Person
-		Id:key
+		Id
 		Name
 		PhoneNumber

@@ -5,20 +5,30 @@ module.exports = function () {
 
     return function (options) {
 
+        console.log("Start");
         var parser = require("./" + options.parser);
         var infile = grunt.file.read(options.infile);
+        console.log("Parsing");
         var parsed = parser.parse(infile);
         var mapped = function () {
-            if (options.map) return options.map(parsed);
+            if (options.map) { console.log("Mapping"); return options.map(parsed); }
             return parsed;
         }();
 
-        var template = swig.compileFile(options.template);
+        if (options.resultout) {
+            console.log("Writing json");
+            grunt.file.write(options.resultout, JSON.stringify(parsed, null, "  "));
+        }
 
-        var result = template(mapped);
-        grunt.file.write(options.out, result);
+        if (options.template) {
+            console.log("Generating from template");
+            var template = swig.compileFile(options.template);
 
-        console.log("Created " + options.out)
+            var result = template(mapped);
+            grunt.file.write(options.out, result);
+
+            console.log("Created " + options.out)
+        }
 
     }
 

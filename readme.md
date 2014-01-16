@@ -6,7 +6,7 @@ The sample.txt contains:
 
 	Acme
 			Project
-					Id:key
+					Id key
 							"Identity"
 					Name
 							"Name of project"

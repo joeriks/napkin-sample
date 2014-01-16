@@ -1,96 +1,36 @@
-// do not use result cache, nor line and column tracking
-/* sample:
-
-Project
-  Id :key
-  Name
-   Write project name:label
-   You need to state the project name:err
-  Address
-  SomeValue :num
-
-
-The idea is to create a json that is easy to use for code generation later.
-
-
-*/
-
 { var indentStack = [], indent = ""; }
 
 start
-  = cmds:(__ cmd:COMMAND __ EOL? {return cmd;})* ns:(__ ns:NAMESPACE __ {return ns;})+    {return {commands:cmds, model:ns}}
-
-NAMESPACEHEAD = c:[a-zA-Z.]+ " "* {return c.join("");}
-
-COMMAND
-  = code:(REF/PROCESS/GENERATE/OUT) {return code;}
-
-REF
-  = "/ref"i " "* text:StringLiteral " "* attachAs:Literal EOL+ {return {type:"ref", file:text, attachAs: attachAs};}
-
-OUT
-  = "/out"i " "* text:StringLiteral EOL+ {return {type:"out", file:text};}
-
-PROCESS
-  = "/process"i " "* text:StringLiteral " "* out:StringLiteral EOL+ {return {type: "process",file:text, out:out};}
-
-GENERATE
-  = "/generate"i " "* text:StringLiteral " "* out:StringLiteral EOL+ {return {type: "generate",file:text, out:out};}
-
-NAMESPACE
-  = SAMEDENT type:(!EOL namespaceHead:NAMESPACEHEAD {return {type:"namespace", "name":namespaceHead}}) __ 
-    children:( INDENT c:TYPE* __ DEDENT { return c; })?
-    { 
-    
-      if (children) type["types"]=children;
-    
-      return type; }
-
-TYPEHEAD = c:[a-zA-Z]+ " "* {return c.join("");}
-
-TYPE
-  = SAMEDENT type:(!EOL typeHead:TYPEHEAD {return {"name":typeHead}}) __ 
-    children:( INDENT c:MEMBER* __ DEDENT { return c; })?
-    { 
-    
-      if (children) type["members"]=children;
-    
-      return type; }
-      
-
-MEMBERHEAD = c:[a-zA-Z]+ " "* t:(":" t:MEMBERTYPE{return t})? {console.log("memberhead");return {name:c.join(""),type:t==null?"string":t}}
- 
-MEMBERTYPE = type:('key'/'number'/'string') {return type;}
+  = cmds:(__ cmd:CMD __ EOL? {return cmd;})* ns:(__ ns:NODE __ {return ns;})+    {return {commands:cmds, model:ns}}
 
 
-MEMBER
-  = SAMEDENT memberHead:(!EOL memberhead:MEMBERHEAD {return memberhead}) __ 
-    details:( INDENT c:DETAIL* DEDENT { return c; })?  
-    { 
-    
-    if (details) {
-		for (var d in details) {
-			if (details[d].type) {
-				memberHead[details[d].type] = details[d].name;
-			} else {
-				memberHead["col_"+d] = details[d].name;
-			}
-		}
-		memberHead["details"] = details; 
+CMD
+  = "/" cmd:Literal WS attributes:(NAMEDATTRIBUTE/ATTRIBUTE)* EOL+ {return {type:cmd.trim(), attributes:attributes};}
+
+
+NODEHEAD = c:[a-zA-Z.]+ " "* {return c.join("");}
+
+WS "whitespace"
+  = " "*/EOL
+
+NODE
+  = SAMEDENT node:(!EOL nodeHead:LiteralOrString " "* attributes:(NAMEDATTRIBUTE/ATTRIBUTE)* {return {node:nodeHead, attributes:attributes}}) __
+    children:( INDENT c:NODE* __ DEDENT { return c; })?
+    {     
+      if (children) node["children"]=children; else node["children"]=[];   
+      return node; 
 	}
-    
-    return memberHead }
 
-DETAIL
-  = SAMEDENT detailHead:(!EOL detailHead:DETAILHEAD {return detailHead}) EOL?     
-  {console.log("detailhead");return detailHead;}
+ATTRIBUTE
+  = attr:LiteralOrString " "* { return {attr:attr}}
 
-DETAILHEAD = c:StringLiteral t:(":" t:DETAILTYPE{return t})? EOL {return {name:c,type:t}}
- 
-DETAILTYPE = typechar:[a-z]* {return typechar.join("");}
+NAMEDATTRIBUTE
+  = name:LiteralOrString "=" attr:LiteralOrString " "* { var o = {};o[name]=attr;return o;}
 
-Literal = c:[a-zA-Z ]* {return c.join("");}
-SomeText = "\"" c:[a-zA-Z ]* "\"" {return c.join("");}
+
+Literal = c:[a-zA-Z]+ {return c.join("");}
+
+LiteralOrString = Literal/StringLiteral
 
 StringLiteral "string"
   = parts:('"' DoubleStringCharacters? '"' / "'" SingleStringCharacters? "'") {
@@ -126,14 +66,8 @@ SAMEDENT
   = i:[ \t]* &{ return i.join("") === indent; }
 
 INDENT
-  = i:[ \t]+ &{ return i.length > indent.length; }
-    { 
-    
-      indentStack.push(indent); 
-      indent = i.join(""); 
-      peg$currPos = offset(); 
-    
-    }
+= i:[ \t]+ &{ return i.length > indent.length; }
+    { indentStack.push(indent); indent = i.join(""); peg$currPos = offset(); }     
 
 DEDENT
   = { indent = indentStack.pop(); }
