@@ -4,7 +4,11 @@
     
 */
 
-/include "include.txt"
+/include "include.txt" Include
+
+/* reference = invisible include v 0.04 */
+/reference "reference.txt" Reference 
+
 /map "samplemap.js"
 
 vars
@@ -40,6 +44,25 @@ Acme foo
     Shortcut for first available ancestor with name
         
         # Id        
+        # City
+        # Address
+        
+        
+Suggested table syntax for v 0.05+
+
+[Name	Text	Date	Size
+Some Name	Total foo	2013-05-09	21 KB
+Some Name	Total foo on first page	2013-05-09	88 KB
+Some Name	Info	2013-05-09	25 KB
+]
+
+[
+Name;Text;Date;Size
+Some Name;Total foo;2013-05-09;21 KB
+Some Name;Total foo on first page;2013-05-09;88 KB
+Some Name;Info	2013-05-09;25 KB
+]
+        
         
 */        
         

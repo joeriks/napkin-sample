@@ -14,10 +14,10 @@ WS "whitespace"
   = " "*/EOL
 
 NODE
-  = SAMEDENT node:(!EOL nodeHead:LiteralOrString " "* attributes:(NAMEDATTRIBUTE/ATTRIBUTE)* {return {node:nodeHead, attributes:attributes}}) __
+  = SAMEDENT node:(!EOL nodeHead:LiteralOrString " "* attributes:(NAMEDATTRIBUTE/ATTRIBUTE)* {if (attributes.length>0) return {node:nodeHead, attributes:attributes}; return {node:nodeHead};}) __
     children:( INDENT c:NODE* __ DEDENT { return c; })?
     {     
-      if (children) node["children"]=children; else node["children"]=[];   
+      if (children) node["children"]=children; 
       return node; 
 	}
 
@@ -28,7 +28,7 @@ NAMEDATTRIBUTE
   = name:LiteralOrString "=" attr:LiteralOrString " "* { var o = {};o[name]=attr;return o;}
 
 
-Literal = c:[a-zA-Z]+ {return c.join("");}
+Literal = c:[a-zA-Z0-9_]+ {return c.join("");}
 
 LiteralOrString = Literal/StringLiteral
 
