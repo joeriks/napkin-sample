@@ -1,6 +1,6 @@
 #Napkin DSL + Code generation
 
-###Version 0.03 - poc / demonstration / alpha
+###Version 0.03 - poc / demonstration / alpha / rfc
 
 Human readable custom made syntax + code generation using project-custom string templates. Using Node and Npm packages. Most importantly PEGjs for parser generation. 
 
@@ -52,7 +52,7 @@ Article + video : http://joeriks.com/2014/01/14/a-simple-dsl-code-generation-usi
 
 General purpose easy to write and read object notation syntax
 
-###Version 0.03
+###Version 0.03 - poc / demonstration / alpha / rfc
 
 Write text with tab indentations to create a object tree with nodes and children.
 
