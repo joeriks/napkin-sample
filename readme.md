@@ -48,7 +48,8 @@ Article + video : http://joeriks.com/2014/01/14/a-simple-dsl-code-generation-usi
 
 4) to make it possible for easy iterations of “top-level changes” – for me or the business persons themselves to see the results of adding and changing details immediately. Without involving the ordinary developer process.
 
-##Napkin Syntax (version 0.03)
+##Napkin Syntax
+###Version 0.03
 
 Write text with tab indentations to create a object tree with nodes and children.
 
@@ -70,7 +71,7 @@ Which outputs to a json like this:
 				{node:"GrandChildNode122"}]}]
 	}]
 
-Node names are literals or strings
+Node names can be literals or strings
 
 	Node1
 		"Child Node 1"
