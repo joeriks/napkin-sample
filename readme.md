@@ -114,7 +114,9 @@ Attributes can also be strings
 
 For comments use /* */
 
-###If you use the Generator you can use include and map commands
+###Include files and map the result with commands
+
+If you use the generator you can run include and map commands.
 
 Include (and parse) another file. Result will be put on top of the existing file.
 
