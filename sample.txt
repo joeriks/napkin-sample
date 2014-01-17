@@ -1,20 +1,52 @@
 /*
 
-	Using DSL syntax version 2014-01-01
-
+	Using DSL syntax
+    
 */
 
 /include "include.txt"
 /map "samplemap.js"
 
-Acme
+vars
+    Id type=key
 
-	Project
+Acme foo
+
+    Top    
+        Id type=key
+
+	ProjectA
+            
+/*
+
+
+  Suggested added functionality for v 0.04+
+  
+
+  Coming syntax for including nodes incl their names
+            
+        = Include.Types.Id        
+        
+
+   Coming syntax for including node attrs and children (excl their names)
+   
+        ThisID = Acme.Top.Id.
+        
+
+    Coming syntax for including nodes relative to the current node
+        
+        = ..Id
+        
+    Shortcut for first available ancestor with name
+        
+        # Id        
+        
+*/        
+        
 		Id
 			"Identity"
 		Name
-			"Name of project"
-			"Helptext"
+			"Name of project"            
 		Address
 			"Full address"
 			"Street 123"
@@ -23,5 +55,6 @@ Acme
 
 	Person
 		Id
+        
 		Name
 		PhoneNumber

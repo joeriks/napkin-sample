@@ -39,11 +39,43 @@
     ]
   },
   {
-    "node": "Acme",
+    "node": "vars",
     "attributes": [],
+    "children": []
+  },
+  {
+    "node": "Id",
+    "attributes": [
+      {
+        "type": "key"
+      }
+    ],
+    "children": []
+  },
+  {
+    "node": "Acme",
+    "attributes": [
+      {
+        "attr": "foo"
+      }
+    ],
+    "children": []
+  },
+  {
+    "node": "Top",
+    "attributes": [],
+    "children": []
+  },
+  {
+    "node": "Id",
+    "attributes": [
+      {
+        "type": "key"
+      }
+    ],
     "children": [
       {
-        "node": "Project",
+        "node": "ProjectA",
         "attributes": [],
         "children": [
           {
@@ -63,11 +95,6 @@
             "children": [
               {
                 "node": "Name of project",
-                "attributes": [],
-                "children": []
-              },
-              {
-                "node": "Helptext",
                 "attributes": [],
                 "children": []
               }
