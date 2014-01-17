@@ -54,7 +54,7 @@ General purpose easy to write and read object notation syntax
 
 ###Version 0.03 - poc / demonstration / alpha / rfc
 
-Write text with tab indentations to create a object tree with nodes and children.
+Write text with tab indentations to define the objects
 
 	Node1
 		ChildNode11
@@ -62,7 +62,7 @@ Write text with tab indentations to create a object tree with nodes and children
 			GrandChildNode121
 			GrandChildNode122
 
-Which the napkin.js parser outputs to a json like this:
+The napkin.js parser outputs it to this object:
 
 	[{
 		node:"Node1",
@@ -100,6 +100,8 @@ Use equal sign to name attributes
 
 	Node
 		ChildNode Name=Attribute1 Color=Attribute2
+
+Result
 
 	[{
 		node:"Node",
