@@ -69,10 +69,30 @@ Add text in columns to add attributes.
 	Node
 		ChildNode Attribute1 Attribute2
 
+Result:
+
+	[{
+		node:"Node",
+		children: [
+			{node:ChildNode,
+			attributes:[
+				{"attr":"Attribute1"},
+				{"attr":"Attribute2"}]}]
+	}]
+
 Use equal sign to name attributes
 
 	Node
 		ChildNode Name=Attribute1 Color=Attribute2
+
+	[{
+		node:"Node",
+		children: [
+			{node:ChildNode,
+			attributes:[
+				{"Name":"Attribute1"},
+				{"Color":"Attribute2"}]}]
+	}]
 
 Attributes can also be strings
 
