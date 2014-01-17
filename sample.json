@@ -1,86 +1,125 @@
-{
-  "commands": [],
-  "model": [
-    {
-      "node": "Acme",
-      "attributes": [],
-      "children": [
-        {
-          "node": "Project",
-          "attributes": [],
-          "children": [
-            {
-              "node": "Id",
-              "attributes": [],
-              "children": [
-                {
-                  "node": "Identity",
-                  "attributes": [],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "node": "Name",
-              "attributes": [],
-              "children": [
-                {
-                  "node": "Name of project",
-                  "attributes": [],
-                  "children": []
-                },
-                {
-                  "node": "Helptext",
-                  "attributes": [],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "node": "Address",
-              "attributes": [],
-              "children": [
-                {
-                  "node": "Full address",
-                  "attributes": [],
-                  "children": []
-                },
-                {
-                  "node": "Street 123",
-                  "attributes": [],
-                  "children": []
-                }
-              ]
-            },
-            {
-              "node": "City",
-              "attributes": [],
-              "children": []
-            }
-          ]
-        },
-        {
-          "node": "Person",
-          "attributes": [],
-          "children": [
-            {
-              "node": "Id",
-              "attributes": [],
-              "children": []
-            },
-            {
-              "node": "Name",
-              "attributes": [],
-              "children": []
-            },
-            {
-              "node": "PhoneNumber",
-              "attributes": [],
-              "children": []
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "node": "TOp",
+    "attributes": [],
+    "children": [
+      {
+        "node": "Toplevelinclude",
+        "attributes": [],
+        "children": []
+      }
+    ]
+  },
+  {
+    "node": "Include",
+    "attributes": [],
+    "children": [
+      {
+        "node": "This",
+        "attributes": [],
+        "children": [
+          {
+            "node": "Sample",
+            "attributes": [],
+            "children": []
+          }
+        ]
+      },
+      {
+        "node": "That",
+        "attributes": [],
+        "children": [
+          {
+            "node": "Sample",
+            "attributes": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "node": "Acme",
+    "attributes": [],
+    "children": [
+      {
+        "node": "Project",
+        "attributes": [],
+        "children": [
+          {
+            "node": "Id",
+            "attributes": [],
+            "children": [
+              {
+                "node": "Identity",
+                "attributes": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "node": "Name",
+            "attributes": [],
+            "children": [
+              {
+                "node": "Name of project",
+                "attributes": [],
+                "children": []
+              },
+              {
+                "node": "Helptext",
+                "attributes": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "node": "Address",
+            "attributes": [],
+            "children": [
+              {
+                "node": "Full address",
+                "attributes": [],
+                "children": []
+              },
+              {
+                "node": "Street 123",
+                "attributes": [],
+                "children": []
+              }
+            ]
+          },
+          {
+            "node": "City",
+            "attributes": [],
+            "children": []
+          }
+        ]
+      },
+      {
+        "node": "Person",
+        "attributes": [],
+        "children": [
+          {
+            "node": "Id",
+            "attributes": [],
+            "children": []
+          },
+          {
+            "node": "Name",
+            "attributes": [],
+            "children": []
+          },
+          {
+            "node": "PhoneNumber",
+            "attributes": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "node": "Hello from mapper"
+  }
+]

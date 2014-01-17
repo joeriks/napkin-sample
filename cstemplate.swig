@@ -4,7 +4,7 @@ namespace {{ node.node }} {
 	public class {{ty.node}} { {% for member in ty.children %}{%if member.col_0%}
 	 [DisplayName("{{member.col_0}}")]{%endif%}{%if member.col_1%}
 	 [DisplayHelp("{{member.col_1}}")]{%endif%}
-	 public {% if (member.type=='key') %}int{% else %}{%if (!(member.type)) %}string{%else%}{{member.type}}{%endif%} {{ member.node }} {get;set;}{% endfor %}
+	 public {% if (member.type=='key') %}int{% else %}{{member.type}}{%endif%} {{ member.node }} {get;set;}{% endfor %}
 	}
 	{% endfor %}
 }

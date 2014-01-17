@@ -4,6 +4,8 @@
 
 */
 
+/include "include.txt"
+/map "samplemap.js"
 
 Acme
 

@@ -27,6 +27,7 @@ module.exports = function (grunt) {
 
             parser: "parser",
             infile: "sample.txt",
+            resultout: "sample.json",
             template: "cstemplate.swig",
             out: "sample.cs"
 
