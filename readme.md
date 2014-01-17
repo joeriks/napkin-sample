@@ -59,7 +59,7 @@ Write text with tab indentations to create a object tree with nodes and children
 			GrandChildNode121
 			GrandChildNode122
 
-Which outputs to a json like this:
+Which the napkin.js parser outputs to a json like this:
 
 	[{
 		node:"Node1",
@@ -114,7 +114,7 @@ Attributes can also be strings
 
 For comments use /* */
 
-You can add commands to your code
+###If you use the Generator you can use include and map commands
 
 Include (and parse) another file. Result will be put on top of the existing file.
 
@@ -131,12 +131,20 @@ The syntax for the map file is
 ##Generator Syntax
 
 	var r = require("./generator");
+
+Parse napkin code file and return the result object
+
 	var parsedResult = r("somefile.txt");
+
+Use the result object with a swig text template and generate a file
+
 	r({infile:"somefile.txt",template:"sometemplate.swig",out:"result.cs"});
 
-	// saving parsed json
+Save the json
+
 	r({infile:"somefile.txt",resultout:"somefile.json"});
 
-	//define parser (js file)
-	r({parser:"parser", infile:"somefile.txt"});
+Define parser (js file)
+
+	r({parser:"alternativeparser", infile:"somefile.txt"});
 
