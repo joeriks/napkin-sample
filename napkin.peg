@@ -35,18 +35,26 @@ Code = i:[=#] c:[.a-zA-Z0-9_]+ {return i + c.join("") ;}
 LiteralOrStringOrCode = Literal/StringLiteral/Code
 
 StringLiteral "string"
-  = parts:('"' DoubleStringCharacters? '"' / "'" SingleStringCharacters? "'") {
+  = parts:('"' DoubleStringCharactersAllowLineTerminator? '"' / "'" SingleStringCharacters? "'") {
       return parts[1];
     }
 
 DoubleStringCharacters
   = chars:DoubleStringCharacter+ { return chars.join(""); }
 
+DoubleStringCharactersAllowLineTerminator
+  = chars:DoubleStringCharacter+ { return chars.join(""); }
+
+
 SingleStringCharacters
   = chars:SingleStringCharacter+ { return chars.join(""); }
 
 DoubleStringCharacter
   = !('"' / "\\" / LineTerminator) char_:. { return char_;     }
+  / "\\" 
+
+DoubleStringCharacterAllowLineTerminator
+  = !('"' / "\\" ) char_:. { return char_;     }
   / "\\" 
 
 SingleStringCharacter

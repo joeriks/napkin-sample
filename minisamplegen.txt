@@ -2,10 +2,15 @@ Test
 	A Yay
 Project
 	Ref
-		A Yep
+		A "multiline
+		yayaya
+		comment"
 	Foo
 		Bar
-		A Yep
+			"Comments like these"
+		A "multiline
+		yayaya
+		comment"
 		A Yay
 		Include
 			This

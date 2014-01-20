@@ -7,9 +7,12 @@ Test
 Project
 
 	Ref
-		A "Yep"
+		A "multiline
+		yayaya
+		comment"
 	Foo
 		Bar	
+			"Comments like these"
 		=.Ref.A
 		=..Test.A
 		=..Include
