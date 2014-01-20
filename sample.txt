@@ -1,83 +1,38 @@
 /*
 
 	Using DSL syntax
-    
 */
 
-/include "include.txt" Include
-
-/* reference = invisible include v 0.04 */
+/include "include.txt" Include 
 /reference "reference.txt" Reference 
 
-/map "samplemap.js"
+/out "sampletxt.txt" "text"
+/out "sample.xml" "xml"
+/out "samplejson.json" "jsonraw"
+/out "sample.cs" "cs"
 
-vars
-    Id type=key
-
-Acme foo
-
-    Top    
-        Id type=key
-
-	ProjectA
-            
-/*
-
-
-  Suggested added functionality for v 0.04+
-  
-
-  Coming syntax for including nodes incl their names
-            
-        = Include.Types.Id        
+Acme1
         
-
-   Coming syntax for including node attrs and children (excl their names)
-   
-        ThisID = Acme.Top.Id.
-        
-
-    Coming syntax for including nodes relative to the current node
-        
-        = ..Id
-        
-    Shortcut for first available ancestor with name
-        
-        # Id        
-        # City
-        # Address
-        
-        
-Suggested table syntax for v 0.05+
-
-[Name	Text	Date	Size
-Some Name	Total foo	2013-05-09	21 KB
-Some Name	Total foo on first page	2013-05-09	88 KB
-Some Name	Info	2013-05-09	25 KB
-]
-
-[
-Name;Text;Date;Size
-Some Name;Total foo;2013-05-09;21 KB
-Some Name;Total foo on first page;2013-05-09;88 KB
-Some Name;Info	2013-05-09;25 KB
-]
-        
-        
-*/        
-        
-		Id
+	_Id
+		Id i
 			"Identity"
-		Name
-			"Name of project"            
+
+
+	_Address
 		Address
 			"Full address"
 			"Street 123"
 		City
-		
+
+
+	Project
+		=._Id._
+		Name
+			"Name of project"
+		=._Address._
 
 	Person
-		Id
-        
-		Name
-		PhoneNumber
+		=._Id._
+		FirstName
+		SecondName
+		=._Address._

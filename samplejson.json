@@ -1,0 +1,325 @@
+{
+  "commands": [],
+  "model": [
+    {
+      "node": "Top",
+      "children": [
+        {
+          "node": "Toplevelinclude"
+        }
+      ]
+    },
+    {
+      "node": "Include",
+      "children": [
+        {
+          "node": "This",
+          "children": [
+            {
+              "node": "Sample"
+            }
+          ]
+        },
+        {
+          "node": "That",
+          "children": [
+            {
+              "node": "Sample"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "Acme1",
+      "children": [
+        {
+          "node": "_Id",
+          "children": [
+            {
+              "node": "Id",
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "children": [
+                {
+                  "node": "Identity"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "_Address",
+          "children": [
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            }
+          ]
+        },
+        {
+          "node": "Project",
+          "children": [
+            {
+              "node": "Id",
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "children": [
+                {
+                  "node": "Identity"
+                }
+              ]
+            },
+            {
+              "node": "Name",
+              "children": [
+                {
+                  "node": "Name of project"
+                }
+              ]
+            },
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            }
+          ]
+        },
+        {
+          "node": "Person",
+          "children": [
+            {
+              "node": "Id",
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "children": [
+                {
+                  "node": "Identity"
+                }
+              ]
+            },
+            {
+              "node": "FirstName"
+            },
+            {
+              "node": "SecondName"
+            },
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "node": "Vars",
+      "children": [
+        {
+          "node": "Foo",
+          "attributes": [
+            {
+              "attr": "Bar"
+            }
+          ],
+          "children": [
+            {
+              "node": "X"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processed": [
+    {
+      "node": "Top",
+      "children": [
+        {
+          "node": "Toplevelinclude"
+        }
+      ]
+    },
+    {
+      "node": "Include",
+      "children": [
+        {
+          "node": "This",
+          "children": [
+            {
+              "node": "Sample"
+            }
+          ]
+        },
+        {
+          "node": "That",
+          "children": [
+            {
+              "node": "Sample"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "node": "Acme1",
+      "children": [
+        {
+          "node": "_Id",
+          "children": [
+            {
+              "node": "Id",
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "children": [
+                {
+                  "node": "Identity"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "_Address",
+          "children": [
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            }
+          ]
+        },
+        {
+          "node": "Project",
+          "children": [
+            {
+              "node": "Id",
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "children": [
+                {
+                  "node": "Identity"
+                }
+              ]
+            },
+            {
+              "node": "Name",
+              "children": [
+                {
+                  "node": "Name of project"
+                }
+              ]
+            },
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            }
+          ]
+        },
+        {
+          "node": "Person",
+          "children": [
+            {
+              "node": "Id",
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "children": [
+                {
+                  "node": "Identity"
+                }
+              ]
+            },
+            {
+              "node": "FirstName"
+            },
+            {
+              "node": "SecondName"
+            },
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

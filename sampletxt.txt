@@ -1,0 +1,34 @@
+Top
+	Toplevelinclude
+Include
+	This
+		Sample
+	That
+		Sample
+Acme1
+	_Id
+		Id i
+			Identity
+	_Address
+		Address
+			Full address
+			Street 123
+		City
+	Project
+		Id i
+			Identity
+		Name
+			Name of project
+		Address
+			Full address
+			Street 123
+		City
+	Person
+		Id i
+			Identity
+		FirstName
+		SecondName
+		Address
+			Full address
+			Street 123
+		City

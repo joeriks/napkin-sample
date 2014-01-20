@@ -3,6 +3,146 @@ module.exports = function () {
     var grunt = require("grunt");
     var swig = require("swig");
 
+    var sampleArray = [
+      {node:"refs"},
+      {node:"two", attributes:[{"attr":"foo"},{"attr":"bar"}]},
+      {node:"three", attributes:[{"attr":"baz"}]},
+      {node:"four",
+      children:[
+          {node:"=.two"},
+          {node:"=.three"},
+          {node:"4three"},    
+          {node:"4four"}          
+      ]}    
+    ];
+
+    var processArray = function(fullarray, childarray, position, iteratorCallback) {
+        
+        var localposition = 0;
+        for (var i in childarray){
+            var itm = childarray[i];
+            
+            var position2 = function(){
+                var copy = position.slice();
+                copy.push(localposition);
+                return copy;
+            }();
+
+            iteratorCallback(fullarray, position2, itm);
+
+            if (itm.children) {
+
+                processArray(fullarray, itm.children, position2, iteratorCallback);
+
+            }
+            localposition ++;
+        }
+    }
+
+    var findChildIterator = function(fullarray, itm, findChildName, callback) {
+        return function(fullarray, position, itm) {
+
+        }
+    };
+
+    var findChild = function(array, findChildName, callback) {
+
+        var find=function(name) {
+                 
+                var firstDot = name.indexOf(".");
+                if (firstDot == -1) {
+                    return {
+                        head: name,
+                        tail: ""
+                    }                        
+                }
+ 
+                return {
+                    head: name.substring(0,firstDot),
+                    tail: name.substring(firstDot+1)
+                }                       
+                         
+            }(findChildName);
+
+        var found = false;
+        for (var i in array) {
+
+            if (array[i].node == find.head) {
+                if (find.tail!="") {
+                    if (array[i].children)
+                        findChild(array[i].children,find.tail, callback)
+                } else {
+                    callback(array[i]);
+                }
+            }
+        }
+
+    };
+
+    var findIterator = function (fullarray, findAt, findChildName, callback){
+        return function(fullarray, position,itm) {
+            console.log(position.join(","));
+            console.log(findAt.join(","));
+            if (position.join(",") === findAt.join(",")) {
+
+                // found parent - now find child
+
+
+
+
+                callback(fullarray, itm);
+            }
+
+        }
+
+    };
+
+    var iterate = function (fullarray, position, itm){
+
+        if (itm.node.substring(0,1)=="="){
+
+            var count = 0;
+
+            for (var i in itm.node.substring(1)){
+                if (itm.node.substring(i+1,i+2)==".") count++; else break;
+            }
+
+            var childName = itm.node.substring(count+2);
+
+            // find relative node
+            // position = [3,2]
+            // dots = 1
+            // position = [3]
+            
+            if (count ==1) {
+                var findAt = position.slice();
+                findAt.pop();
+                var onFound = function (fullarray, founditm) {
+
+
+                    findChild(founditm.children,childName, function(founditm) {
+
+                        // set attributes and children
+                        if (founditm.attributes) itm.attributes = founditm.attributes;
+                        if (founditm.children) itm.children = founditm.children;
+                        //itm.node = founditm.node;
+
+                    });
+                    
+
+                }
+                var fi = findIterator(fullarray, findAt, onFound);
+
+                processArray(fullarray, fullarray, [], fi);
+            }
+            
+
+        }
+
+    }
+
+    var processAll = function(array){ processArray(array, array, [], iterate)};
+
     var generate = function(options) {
 
         if (typeof (options) == "string") options = { infile: options };
