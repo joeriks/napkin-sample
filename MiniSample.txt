@@ -1,0 +1,19 @@
+﻿/reference "include.txt"
+/out "minisamplegen.txt" "text"
+
+Test
+	A "Yay"
+
+Project
+
+	Ref
+		A "Yep"
+	Foo
+		Bar	
+		=.Ref.A
+		=..Test.A
+		=..Include
+
+	Bar
+		=..Include._
+

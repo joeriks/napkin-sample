@@ -31,28 +31,41 @@
       ]
     },
     {
+      "node": "Root",
+      "children": [
+        {
+          "node": "RootId",
+          "attributes": [
+            {
+              "attr": "i"
+            }
+          ],
+          "children": [
+            {
+              "node": "root"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "node": "Acme",
       "children": [
         {
-          "node": "_Id",
+          "node": "Id",
+          "attributes": [
+            {
+              "attr": "i"
+            }
+          ],
           "children": [
             {
-              "node": "Id",
-              "attributes": [
-                {
-                  "attr": "i"
-                }
-              ],
-              "children": [
-                {
-                  "node": "Identity"
-                }
-              ]
+              "node": "DatabaseId"
             }
           ]
         },
         {
-          "node": "_Address",
+          "node": "Address_Mixin",
           "children": [
             {
               "node": "Address",
@@ -61,7 +74,7 @@
                   "node": "Full address"
                 },
                 {
-                  "node": "Street 123"
+                  "node": "i.e. Street 123"
                 }
               ]
             },
@@ -74,20 +87,71 @@
           ]
         },
         {
-          "node": "Project",
+          "node": "Client",
           "children": [
             {
+              "node": "=..Root.RootId"
+            },
+            {
+              "node": "=..Acme.Id"
+            },
+            {
               "node": "Id",
+              "children": [
+                {
+                  "node": "DatabaseId"
+                }
+              ],
               "attributes": [
                 {
                   "attr": "i"
                 }
               ],
+              "processed": ".Id"
+            },
+            {
+              "node": "Address",
               "children": [
                 {
-                  "node": "Identity"
+                  "node": "Full address"
+                },
+                {
+                  "node": "i.e. Street 123"
                 }
               ]
+            },
+            {
+              "node": "City"
+            },
+            {
+              "node": "ZipCode"
+            },
+            {
+              "node": "Projects",
+              "attributes": [
+                {
+                  "attr": "List<Project>"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "Project",
+          "children": [
+            {
+              "node": "Id",
+              "children": [
+                {
+                  "node": "DatabaseId"
+                }
+              ],
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "processed": ".Id"
             },
             {
               "node": "Name",
@@ -104,7 +168,7 @@
                   "node": "Full address"
                 },
                 {
-                  "node": "Street 123"
+                  "node": "i.e. Street 123"
                 }
               ]
             },
@@ -121,16 +185,17 @@
           "children": [
             {
               "node": "Id",
+              "children": [
+                {
+                  "node": "DatabaseId"
+                }
+              ],
               "attributes": [
                 {
                   "attr": "i"
                 }
               ],
-              "children": [
-                {
-                  "node": "Identity"
-                }
-              ]
+              "processed": ".Id"
             },
             {
               "node": "FirstName"
@@ -145,7 +210,7 @@
                   "node": "Full address"
                 },
                 {
-                  "node": "Street 123"
+                  "node": "i.e. Street 123"
                 }
               ]
             },
@@ -211,28 +276,41 @@
       ]
     },
     {
+      "node": "Root",
+      "children": [
+        {
+          "node": "RootId",
+          "attributes": [
+            {
+              "attr": "i"
+            }
+          ],
+          "children": [
+            {
+              "node": "root"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "node": "Acme",
       "children": [
         {
-          "node": "_Id",
+          "node": "Id",
+          "attributes": [
+            {
+              "attr": "i"
+            }
+          ],
           "children": [
             {
-              "node": "Id",
-              "attributes": [
-                {
-                  "attr": "i"
-                }
-              ],
-              "children": [
-                {
-                  "node": "Identity"
-                }
-              ]
+              "node": "DatabaseId"
             }
           ]
         },
         {
-          "node": "_Address",
+          "node": "Address_Mixin",
           "children": [
             {
               "node": "Address",
@@ -241,7 +319,7 @@
                   "node": "Full address"
                 },
                 {
-                  "node": "Street 123"
+                  "node": "i.e. Street 123"
                 }
               ]
             },
@@ -254,20 +332,71 @@
           ]
         },
         {
-          "node": "Project",
+          "node": "Client",
           "children": [
             {
+              "node": "=..Root.RootId"
+            },
+            {
+              "node": "=..Acme.Id"
+            },
+            {
               "node": "Id",
+              "children": [
+                {
+                  "node": "DatabaseId"
+                }
+              ],
               "attributes": [
                 {
                   "attr": "i"
                 }
               ],
+              "processed": ".Id"
+            },
+            {
+              "node": "Address",
               "children": [
                 {
-                  "node": "Identity"
+                  "node": "Full address"
+                },
+                {
+                  "node": "i.e. Street 123"
                 }
               ]
+            },
+            {
+              "node": "City"
+            },
+            {
+              "node": "ZipCode"
+            },
+            {
+              "node": "Projects",
+              "attributes": [
+                {
+                  "attr": "List<Project>"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node": "Project",
+          "children": [
+            {
+              "node": "Id",
+              "children": [
+                {
+                  "node": "DatabaseId"
+                }
+              ],
+              "attributes": [
+                {
+                  "attr": "i"
+                }
+              ],
+              "processed": ".Id"
             },
             {
               "node": "Name",
@@ -284,7 +413,7 @@
                   "node": "Full address"
                 },
                 {
-                  "node": "Street 123"
+                  "node": "i.e. Street 123"
                 }
               ]
             },
@@ -301,16 +430,17 @@
           "children": [
             {
               "node": "Id",
+              "children": [
+                {
+                  "node": "DatabaseId"
+                }
+              ],
               "attributes": [
                 {
                   "attr": "i"
                 }
               ],
-              "children": [
-                {
-                  "node": "Identity"
-                }
-              ]
+              "processed": ".Id"
             },
             {
               "node": "FirstName"
@@ -325,7 +455,7 @@
                   "node": "Full address"
                 },
                 {
-                  "node": "Street 123"
+                  "node": "i.e. Street 123"
                 }
               ]
             },

@@ -13,18 +13,22 @@
 			</node>
 		</node>
 	</node>
-	<node name="Acme">
-		<node name="_Id">
-			<node name="Id" attr="i">
-				<node name="Identity">
-				</node>
+	<node name="Root">
+		<node name="RootId" attr="i">
+			<node name="root">
 			</node>
 		</node>
-		<node name="_Address">
+	</node>
+	<node name="Acme">
+		<node name="Id" attr="i">
+			<node name="DatabaseId">
+			</node>
+		</node>
+		<node name="Address_Mixin">
 			<node name="Address">
 				<node name="Full address">
 				</node>
-				<node name="Street 123">
+				<node name="i.e. Street 123">
 				</node>
 			</node>
 			<node name="City">
@@ -32,9 +36,31 @@
 			<node name="ZipCode">
 			</node>
 		</node>
+		<node name="Client">
+			<node name="=..Root.RootId">
+			</node>
+			<node name="=..Acme.Id">
+			</node>
+			<node name="Id" attr="i">
+				<node name="DatabaseId">
+				</node>
+			</node>
+			<node name="Address">
+				<node name="Full address">
+				</node>
+				<node name="i.e. Street 123">
+				</node>
+			</node>
+			<node name="City">
+			</node>
+			<node name="ZipCode">
+			</node>
+			<node name="Projects" attr="List<Project>">
+			</node>
+		</node>
 		<node name="Project">
 			<node name="Id" attr="i">
-				<node name="Identity">
+				<node name="DatabaseId">
 				</node>
 			</node>
 			<node name="Name">
@@ -44,7 +70,7 @@
 			<node name="Address">
 				<node name="Full address">
 				</node>
-				<node name="Street 123">
+				<node name="i.e. Street 123">
 				</node>
 			</node>
 			<node name="City">
@@ -54,7 +80,7 @@
 		</node>
 		<node name="Person">
 			<node name="Id" attr="i">
-				<node name="Identity">
+				<node name="DatabaseId">
 				</node>
 			</node>
 			<node name="FirstName">
@@ -64,7 +90,7 @@
 			<node name="Address">
 				<node name="Full address">
 				</node>
-				<node name="Street 123">
+				<node name="i.e. Street 123">
 				</node>
 			</node>
 			<node name="City">

@@ -11,28 +11,35 @@
 /out "samplejson.json" "jsonraw"
 /out "sample.cs" "cs"
 
+Root
+	RootId i
+		"root"
 Acme
-        
-	_Id
-		Id i
-			"Identity"
-
-	_Address
+	Id i
+		"DatabaseId"
+      
+	Address_Mixin
 		Address
 			"Full address"
-			"Street 123"
+			"i.e. Street 123"
 		City
 		ZipCode
 
+	Client
+		=..Root.RootId
+		=..Acme.Id
+		=.Id
+		=.Address_Mixin._
+		Projects "List<Project>"
 
 	Project
-		=._Id._
+		=.Id
 		Name
 			"Name of project"
-		=._Address._
+		=.Address_Mixin._
 
 	Person
-		=._Id._
+		=.Id
 		FirstName
 		SecondName		
-		=._Address._
+		=.Address_Mixin._

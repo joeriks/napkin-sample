@@ -17,6 +17,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="include.txt" />
+    <Content Include="MiniSample.txt" />
     <Content Include="reference.txt" />
     <Content Include="sample.txt" />
     <Content Include="TextFile1.txt" />

@@ -5,33 +5,46 @@ Include
 		Sample
 	That
 		Sample
+Root
+	RootId i
+		root
 Acme
-	_Id
-		Id i
-			Identity
-	_Address
+	Id i
+		DatabaseId
+	Address_Mixin
 		Address
 			Full address
-			Street 123
+			i.e. Street 123
 		City
 		ZipCode
+	Client
+		=..Root.RootId
+		=..Acme.Id
+		Id i
+			DatabaseId
+		Address
+			Full address
+			i.e. Street 123
+		City
+		ZipCode
+		Projects List<Project>
 	Project
 		Id i
-			Identity
+			DatabaseId
 		Name
 			Name of project
 		Address
 			Full address
-			Street 123
+			i.e. Street 123
 		City
 		ZipCode
 	Person
 		Id i
-			Identity
+			DatabaseId
 		FirstName
 		SecondName
 		Address
 			Full address
-			Street 123
+			i.e. Street 123
 		City
 		ZipCode
