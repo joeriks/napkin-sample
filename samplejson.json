@@ -31,7 +31,7 @@
       ]
     },
     {
-      "node": "Acme1",
+      "node": "Acme",
       "children": [
         {
           "node": "_Id",
@@ -67,6 +67,9 @@
             },
             {
               "node": "City"
+            },
+            {
+              "node": "ZipCode"
             }
           ]
         },
@@ -107,6 +110,9 @@
             },
             {
               "node": "City"
+            },
+            {
+              "node": "ZipCode"
             }
           ]
         },
@@ -145,6 +151,9 @@
             },
             {
               "node": "City"
+            },
+            {
+              "node": "ZipCode"
             }
           ]
         }
@@ -202,7 +211,7 @@
       ]
     },
     {
-      "node": "Acme1",
+      "node": "Acme",
       "children": [
         {
           "node": "_Id",
@@ -238,6 +247,9 @@
             },
             {
               "node": "City"
+            },
+            {
+              "node": "ZipCode"
             }
           ]
         },
@@ -278,6 +290,9 @@
             },
             {
               "node": "City"
+            },
+            {
+              "node": "ZipCode"
             }
           ]
         },
@@ -316,6 +331,9 @@
             },
             {
               "node": "City"
+            },
+            {
+              "node": "ZipCode"
             }
           ]
         }

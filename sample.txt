@@ -11,18 +11,18 @@
 /out "samplejson.json" "jsonraw"
 /out "sample.cs" "cs"
 
-Acme1
+Acme
         
 	_Id
 		Id i
 			"Identity"
-
 
 	_Address
 		Address
 			"Full address"
 			"Street 123"
 		City
+		ZipCode
 
 
 	Project
@@ -34,5 +34,5 @@ Acme1
 	Person
 		=._Id._
 		FirstName
-		SecondName
+		SecondName		
 		=._Address._

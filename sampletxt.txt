@@ -5,7 +5,7 @@ Include
 		Sample
 	That
 		Sample
-Acme1
+Acme
 	_Id
 		Id i
 			Identity
@@ -14,6 +14,7 @@ Acme1
 			Full address
 			Street 123
 		City
+		ZipCode
 	Project
 		Id i
 			Identity
@@ -23,6 +24,7 @@ Acme1
 			Full address
 			Street 123
 		City
+		ZipCode
 	Person
 		Id i
 			Identity
@@ -32,3 +34,4 @@ Acme1
 			Full address
 			Street 123
 		City
+		ZipCode

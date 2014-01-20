@@ -14,7 +14,7 @@ function repeat(pattern, count) {
     return result;
 }
 
-function genericprocessor(pre, post) {
+function genericprocessor(pre, hasChildren, post) {
     var buffer = "";
     var write = function (text) {
         buffer += text;
@@ -38,7 +38,12 @@ function genericprocessor(pre, post) {
             pre({ level: level, node: node, tabs: tabs, write: write });
 
         //console.log(tabs + "<node name=\"" + node.node + "\">");
-        if (node.children) {
+        if (typeof hasChildren == "undefined" || hasChildren == null)
+            hasChildren = function () {
+                return (node.children);
+            };
+
+        if (hasChildren({ level: level, node: node, tabs: tabs, write: write })) {
             for (var i in node.children) {
                 pr(node.children[i], level + 1);
             }
@@ -49,6 +54,7 @@ function genericprocessor(pre, post) {
     };
 
     return function (nodes) {
+        buffer = "";
         pr(nodes);
         return buffer;
     };
@@ -69,7 +75,7 @@ var generateTags = genericprocessor(function (pr) {
         attrs = " " + atts.join(" ");
 
     pr.write(pr.tabs + "<node name=\"" + pr.node.node + "\"" + attrs + ">\n");
-}, function (pr) {
+}, null, function (pr) {
     pr.write(pr.tabs + "</node>\n");
 });
 
@@ -93,7 +99,7 @@ var generateText = genericprocessor(function (pr) {
         attrs = " " + atts.join(" ");
 
     pr.write(pr.tabs + pr.node.node + attrs + "\n");
-}, function (pr) {
+}, null, function (pr) {
 });
 
 var generateCs = genericprocessor(function (pr) {
@@ -116,11 +122,13 @@ var generateCs = genericprocessor(function (pr) {
         attrs = " " + atts.join(" ");
 
     if (pr.level == 0) {
-        pr.write(pr.tabs + "namespace " + pr.node.node + " {\n");
+        if (pr.node.node.indexOf("_") != 0)
+            pr.write(pr.tabs + "namespace " + pr.node.node + " {\n");
     }
 
     if (pr.level == 1) {
-        pr.write(pr.tabs + "public class " + pr.node.node + " {\n");
+        if (pr.node.node.indexOf("_") != 0)
+            pr.write(pr.tabs + "public class " + pr.node.node + " {\n");
     }
 
     if (pr.level == 2) {
@@ -130,8 +138,13 @@ var generateCs = genericprocessor(function (pr) {
         pr.write(pr.tabs + "public " + type + " " + pr.node.node + " {get;set;}\n");
     }
 }, function (pr) {
+    if ((pr.node.children) && pr.node.node.indexOf("_") != 0)
+        return true;
+    return false;
+}, function (pr) {
     if (pr.level == 0 || pr.level == 1) {
-        pr.write(pr.tabs + "}\n");
+        if (pr.node.node.indexOf("_") != 0)
+            pr.write(pr.tabs + "}\n");
     }
 });
 
@@ -323,7 +336,11 @@ function generate(param) {
 
     var fileAsString = fs.readFileSync(infile, "utf8").replace(/^\uFEFF/, '');
 
-    var parsed = pegJsNapkinParser.parse(fileAsString);
+    var parser = createPegJsNapkinParser();
+    var parsed = parser.parse(fileAsString);
+
+    console.log("Infile length: " + fileAsString.length);
+    console.log("Parsed to length: " + JSON.stringify(parsed).length);
 
     // process
     if (parsed.commands) {
@@ -377,9 +394,12 @@ function generate(param) {
                     console.log("Creating " + type + " format");
 
                     if (!parsed.processed) {
-                        parsed.processed = parsed.model.slice();
+                        console.log("Processing");
+                        parsed.processed = parsed.model.slice(0);
                         processAll(parsed.processed);
                     }
+                    console.log("Processed to length " + JSON.stringify(parsed.processed).length);
+
                     if (type == "text") {
                         var formatted = generateText(parsed.processed);
                         fs.writeFileSync(filename, formatted);
@@ -396,6 +416,7 @@ function generate(param) {
                     }
                     if (type == "cs") {
                         var formatted = generateCs(parsed.processed);
+                        console.log("Formatted to length " + formatted.length);
                         fs.writeFileSync(filename, formatted);
                         console.log("Created " + filename);
                     }

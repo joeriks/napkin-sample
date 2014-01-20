@@ -13,7 +13,7 @@
 			</node>
 		</node>
 	</node>
-	<node name="Acme1">
+	<node name="Acme">
 		<node name="_Id">
 			<node name="Id" attr="i">
 				<node name="Identity">
@@ -28,6 +28,8 @@
 				</node>
 			</node>
 			<node name="City">
+			</node>
+			<node name="ZipCode">
 			</node>
 		</node>
 		<node name="Project">
@@ -47,6 +49,8 @@
 			</node>
 			<node name="City">
 			</node>
+			<node name="ZipCode">
+			</node>
 		</node>
 		<node name="Person">
 			<node name="Id" attr="i">
@@ -64,6 +68,8 @@
 				</node>
 			</node>
 			<node name="City">
+			</node>
+			<node name="ZipCode">
 			</node>
 		</node>
 	</node>

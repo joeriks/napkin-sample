@@ -3,47 +3,23 @@ module.exports = function (grunt) {
     grunt.initConfig({
         watch: {
             files: 'sample.txt',
-            tasks: ['generate'],
+            tasks: ['napkin'],
             options: {
                 spawn: false,
-            }
-        },
-        peg: {
-            napkin: {
-                src: "napkin.peg",
-                dest: "parser.js"
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-peg');
 
-    var generate = require("./generator");
+    var napkin = require("./napkin");
 
-    grunt.registerTask('generate', function () {
+    grunt.registerTask('napkin', function () {
 
-        generate({
-
-            parser: "parser",
-            infile: "sample.txt",
-            resultout: "sample.json",
-            template: "cstemplate.swig",
-            out: "sample.cs"
-
-        });
-
-        generate({
-
-            parser: "parser",
-            infile: "sample.txt",
-            template: "htmltemplate.swig",
-            out: "sample.html"
-
-        });
+        napkin.generate("sample.txt");
 
     });
-    grunt.registerTask('default', ['peg', 'generate', 'watch']);
+    grunt.registerTask('default', ['napkin', 'watch']);
 
 
 };
