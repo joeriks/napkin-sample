@@ -2,12 +2,54 @@
   "commands": [],
   "model": [
     {
+      "node": "References",
+      "children": [
+        {
+          "node": "Id",
+          "attributes": [
+            {
+              "attr": "i"
+            }
+          ],
+          "children": [
+            {
+              "node": "Database id"
+            }
+          ]
+        },
+        {
+          "node": "Address",
+          "children": [
+            {
+              "node": "Address",
+              "children": [
+                {
+                  "node": "Full address"
+                },
+                {
+                  "node": "i.e. Street 123"
+                }
+              ]
+            },
+            {
+              "node": "City"
+            },
+            {
+              "node": "ZipCode"
+            }
+          ]
+        }
+      ],
+      "included": "reference"
+    },
+    {
       "node": "Top",
       "children": [
         {
           "node": "Toplevelinclude"
         }
-      ]
+      ],
+      "included": "reference"
     },
     {
       "node": "Include",
@@ -28,7 +70,8 @@
             }
           ]
         }
-      ]
+      ],
+      "included": "reference"
     },
     {
       "node": "Root",
@@ -42,7 +85,7 @@
           ],
           "children": [
             {
-              "node": "root"
+              "node": "rsoot"
             }
           ]
         }
@@ -52,54 +95,13 @@
       "node": "Acme",
       "children": [
         {
-          "node": "Id",
-          "attributes": [
-            {
-              "attr": "i"
-            }
-          ],
-          "children": [
-            {
-              "node": "DatabaseId"
-            }
-          ]
-        },
-        {
-          "node": "Address_Mixin",
-          "children": [
-            {
-              "node": "Address",
-              "children": [
-                {
-                  "node": "Full address"
-                },
-                {
-                  "node": "i.e. Street 123"
-                }
-              ]
-            },
-            {
-              "node": "City"
-            },
-            {
-              "node": "ZipCode"
-            }
-          ]
-        },
-        {
           "node": "Client",
           "children": [
-            {
-              "node": "=..Root.RootId"
-            },
-            {
-              "node": "=..Acme.Id"
-            },
             {
               "node": "Id",
               "children": [
                 {
-                  "node": "DatabaseId"
+                  "node": "Database id"
                 }
               ],
               "attributes": [
@@ -107,7 +109,7 @@
                   "attr": "i"
                 }
               ],
-              "processed": ".Id"
+              "processed": "..References.Id"
             },
             {
               "node": "Address",
@@ -143,7 +145,7 @@
               "node": "Id",
               "children": [
                 {
-                  "node": "DatabaseId"
+                  "node": "Database id"
                 }
               ],
               "attributes": [
@@ -151,7 +153,7 @@
                   "attr": "i"
                 }
               ],
-              "processed": ".Id"
+              "processed": "..References.Id"
             },
             {
               "node": "Name",
@@ -187,7 +189,7 @@
               "node": "Id",
               "children": [
                 {
-                  "node": "DatabaseId"
+                  "node": "Database id"
                 }
               ],
               "attributes": [
@@ -195,7 +197,7 @@
                   "attr": "i"
                 }
               ],
-              "processed": ".Id"
+              "processed": "..References.Id"
             },
             {
               "node": "FirstName"
@@ -225,56 +227,7 @@
       ]
     }
   ],
-  "references": [
-    {
-      "node": "Vars",
-      "children": [
-        {
-          "node": "Foo",
-          "attributes": [
-            {
-              "attr": "Bar"
-            }
-          ],
-          "children": [
-            {
-              "node": "X"
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "processed": [
-    {
-      "node": "Top",
-      "children": [
-        {
-          "node": "Toplevelinclude"
-        }
-      ]
-    },
-    {
-      "node": "Include",
-      "children": [
-        {
-          "node": "This",
-          "children": [
-            {
-              "node": "Sample"
-            }
-          ]
-        },
-        {
-          "node": "That",
-          "children": [
-            {
-              "node": "Sample"
-            }
-          ]
-        }
-      ]
-    },
     {
       "node": "Root",
       "children": [
@@ -287,7 +240,7 @@
           ],
           "children": [
             {
-              "node": "root"
+              "node": "rsoot"
             }
           ]
         }
@@ -297,54 +250,13 @@
       "node": "Acme",
       "children": [
         {
-          "node": "Id",
-          "attributes": [
-            {
-              "attr": "i"
-            }
-          ],
-          "children": [
-            {
-              "node": "DatabaseId"
-            }
-          ]
-        },
-        {
-          "node": "Address_Mixin",
-          "children": [
-            {
-              "node": "Address",
-              "children": [
-                {
-                  "node": "Full address"
-                },
-                {
-                  "node": "i.e. Street 123"
-                }
-              ]
-            },
-            {
-              "node": "City"
-            },
-            {
-              "node": "ZipCode"
-            }
-          ]
-        },
-        {
           "node": "Client",
           "children": [
-            {
-              "node": "=..Root.RootId"
-            },
-            {
-              "node": "=..Acme.Id"
-            },
             {
               "node": "Id",
               "children": [
                 {
-                  "node": "DatabaseId"
+                  "node": "Database id"
                 }
               ],
               "attributes": [
@@ -352,7 +264,7 @@
                   "attr": "i"
                 }
               ],
-              "processed": ".Id"
+              "processed": "..References.Id"
             },
             {
               "node": "Address",
@@ -388,7 +300,7 @@
               "node": "Id",
               "children": [
                 {
-                  "node": "DatabaseId"
+                  "node": "Database id"
                 }
               ],
               "attributes": [
@@ -396,7 +308,7 @@
                   "attr": "i"
                 }
               ],
-              "processed": ".Id"
+              "processed": "..References.Id"
             },
             {
               "node": "Name",
@@ -432,7 +344,7 @@
               "node": "Id",
               "children": [
                 {
-                  "node": "DatabaseId"
+                  "node": "Database id"
                 }
               ],
               "attributes": [
@@ -440,7 +352,7 @@
                   "attr": "i"
                 }
               ],
-              "processed": ".Id"
+              "processed": "..References.Id"
             },
             {
               "node": "FirstName"

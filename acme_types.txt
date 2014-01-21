@@ -1,0 +1,33 @@
+/*
+
+	Using DSL syntax
+
+*/
+
+/reference "reference.txt" Ref
+
+/out "acme.cs" "cs"
+
+Acme
+
+	Client
+		=..References.Id		   
+		=..References.Address._  
+
+		Projects "List<Project>" 
+
+	Project
+		=..References.Id		
+
+		Name
+			"Name of project"
+
+		=..References.Address._
+
+	Person
+		=..References.Id		
+
+		FirstName
+		SecondName		
+
+		=..References.Address._

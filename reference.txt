@@ -1,3 +1,13 @@
-Vars
-	Foo Bar
-		X
+References
+
+	Id i
+		"Database id"
+      
+	Address
+		Address
+			"Full address"
+			"i.e. Street 123"
+		City
+		ZipCode
+		Country
+			"Optional"		

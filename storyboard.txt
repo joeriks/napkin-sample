@@ -1,0 +1,39 @@
+/*
+
+	Using DSL syntax
+
+*/
+
+/reference "acme_types.txt" Acme
+/reference "buttons.txt" Buttons
+/out "storyboard_result.txt" "text"
+/out "storyboard.json" "json"
+
+Storyboard
+
+	"1. Project page"
+
+		"Project properties"
+
+			=...Acme.Project._
+
+		Buttons
+			=...Buttons.Start._
+
+	"2. Client page"
+
+		"Client properties" Section
+
+			=...Acme.Client._
+
+		Buttons
+			=...Buttons.Progress._
+
+	"3. Finish page"
+
+		"Review and finish"
+
+		Buttons
+			=...Buttons.Finish._
+
+

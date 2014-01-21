@@ -2,21 +2,22 @@
 /out "minisamplegen.txt" "text"
 
 Test
-	A "Yay"
+	A "Yayishh"
 
 Project
 
 	Ref
-		A "multiline
-		yayaya
-		comment"
+		Comments "Multiline
+			comment
+			works"
 	Foo
 		Bar	
-			"Comments like these"
-		=.Ref.A
+			"Comments can be inline aswell"
+		=.Ref.Comments
 		=..Test.A
 		=..Include
 
 	Bar
+		"Includes comes from referenced file"
 		=..Include._
 

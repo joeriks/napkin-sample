@@ -1,0 +1,39 @@
+Storyboard
+	"1. Project page"
+		"Project properties"
+			Id i
+				"Database id"
+			Name
+				"Name of project"
+			Address
+				"Full address"
+				"i.e. Street 123"
+			City
+			ZipCode
+			Country
+				Optional
+		Buttons
+			Next
+			Cancel
+	"2. Client page"
+		"Client properties" Section
+			Id i
+				"Database id"
+			Address
+				"Full address"
+				"i.e. Street 123"
+			City
+			ZipCode
+			Country
+				Optional
+			Projects List<Project>
+		Buttons
+			Previous
+			Next
+			Cancel
+	"3. Finish page"
+		"Review and finish"
+		Buttons
+			Previous
+			Finish
+			Cancel

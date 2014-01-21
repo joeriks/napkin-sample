@@ -2,7 +2,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         watch: {
-            files: 'sample.txt',
+            files: '*.txt',
             tasks: ['napkin'],
             options: {
                 spawn: false,
@@ -13,10 +13,24 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     var napkin = require("./napkin");
+    var changedFiles = [];
+    grunt.event.on('watch', function(action, filepath) {
+        console.log("File " + filepath + " " + action);
+        changedFiles.push({file:filepath, action:action});
+    });
 
     grunt.registerTask('napkin', function () {
 
-        napkin.generate("sample.txt");
+        if (changedFiles){
+
+            for(var i = changedFiles.length - 1; i >= 0; i--) {
+                
+                var filename = changedFiles[i].file;
+                napkin.generate(filename);
+                changedFiles.splice(i, 1);
+            }
+
+        }
 
     });
     grunt.registerTask('default', ['napkin', 'watch']);

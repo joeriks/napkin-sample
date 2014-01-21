@@ -1,0 +1,173 @@
+[
+  {
+    "node": "Storyboard",
+    "children": [
+      {
+        "node": "1. Project page",
+        "children": [
+          {
+            "node": "Project properties",
+            "children": [
+              {
+                "node": "Id",
+                "children": [
+                  {
+                    "node": "Database id"
+                  }
+                ],
+                "attributes": [
+                  {
+                    "attr": "i"
+                  }
+                ],
+                "processed": "..References.Id"
+              },
+              {
+                "node": "Name",
+                "children": [
+                  {
+                    "node": "Name of project"
+                  }
+                ]
+              },
+              {
+                "node": "Address",
+                "children": [
+                  {
+                    "node": "Full address"
+                  },
+                  {
+                    "node": "i.e. Street 123"
+                  }
+                ]
+              },
+              {
+                "node": "City"
+              },
+              {
+                "node": "ZipCode"
+              },
+              {
+                "node": "Country",
+                "children": [
+                  {
+                    "node": "Optional"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "node": "Buttons",
+            "children": [
+              {
+                "node": "Next"
+              },
+              {
+                "node": "Cancel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "node": "2. Client page",
+        "children": [
+          {
+            "node": "Client properties",
+            "attributes": [
+              {
+                "attr": "Section"
+              }
+            ],
+            "children": [
+              {
+                "node": "Id",
+                "children": [
+                  {
+                    "node": "Database id"
+                  }
+                ],
+                "attributes": [
+                  {
+                    "attr": "i"
+                  }
+                ],
+                "processed": "..References.Id"
+              },
+              {
+                "node": "Address",
+                "children": [
+                  {
+                    "node": "Full address"
+                  },
+                  {
+                    "node": "i.e. Street 123"
+                  }
+                ]
+              },
+              {
+                "node": "City"
+              },
+              {
+                "node": "ZipCode"
+              },
+              {
+                "node": "Country",
+                "children": [
+                  {
+                    "node": "Optional"
+                  }
+                ]
+              },
+              {
+                "node": "Projects",
+                "attributes": [
+                  {
+                    "attr": "List<Project>"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "node": "Buttons",
+            "children": [
+              {
+                "node": "Previous"
+              },
+              {
+                "node": "Next"
+              },
+              {
+                "node": "Cancel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "node": "3. Finish page",
+        "children": [
+          {
+            "node": "Review and finish"
+          },
+          {
+            "node": "Buttons",
+            "children": [
+              {
+                "node": "Previous"
+              },
+              {
+                "node": "Finish"
+              },
+              {
+                "node": "Cancel"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

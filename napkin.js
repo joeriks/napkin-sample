@@ -1,7 +1,7 @@
 var fs = require("fs");
 var napkinparser = require("./napkinparser");
 
-console.log("v 0.044");
+console.log("v 0.045");
 
 function repeat(pattern, count) {
     if (count < 1)
@@ -171,9 +171,7 @@ function processAll(array) {
 }
 
 function processArray(fullarray, childarray, parentNode, position, iteratorCallback) {
-    if (parentNode)
-        console.log(parentNode.node);
-
+    //if (parentNode) console.log(parentNode.node);
     var localposition = 0;
     for (var i in childarray) {
         var currentNode = childarray[i];
@@ -225,7 +223,7 @@ function findChild(array, findChildName, callback) {
         //console.log("looking at " + array[i].node + " for " + find.head);
         var lookAtNode = array[i];
         if (lookAtNode.node == find.head) {
-            console.log("Found head " + find.head + " now looking for " + ((find.tail) ? find.tail : "attributes"));
+            //console.log("Found head " + find.head + " now looking for " + ((find.tail) ? find.tail : "attributes"));
             if (find.tail != "") {
                 //console.log("found, continuing");
                 var children = lookAtNode.children;
@@ -233,7 +231,6 @@ function findChild(array, findChildName, callback) {
                     if (find.tail != "_") {
                         findChild(children, find.tail, callback);
                     } else {
-                        console.log("Include all children");
                         for (var ii in children) {
                             var child = children[ii];
                             callback(children[ii], true);
@@ -256,15 +253,13 @@ function createFindIterator(fullarray, findAt, findChildName, callback) {
 
         var found = (pos === find);
 
-        console.log("looking at " + pos + " for " + find + " and name " + findChildName);
-
+        //console.log("looking at " + pos + " for " + find + " and name " + findChildName);
         if (position.length == 1 && find == "") {
             // top level search
             var headTail = splitHeadTail(findChildName, ".");
 
-            console.log("same level lookup for " + headTail.head);
-            console.log("checking " + itm.node);
-
+            //console.log("same level lookup for " + headTail.head);
+            //console.log("checking " + itm.node);
             if (itm.node == headTail.head && headTail.tail == "_") {
                 for (var i in itm.children) {
                     callback(fullarray, itm.children[i], true);
@@ -290,16 +285,15 @@ function createFindIterator(fullarray, findAt, findChildName, callback) {
         }
 
         if (found) {
-            console.log("found parent " + itm.node + ((findChildName) ? " now looking for " + findChildName : ""));
-
+            //console.log("found parent " + itm.node + ((findChildName) ? " now looking for " + findChildName : ""));
             if (findChildName == "") {
                 callback(fullarray, itm, false);
             } else {
-                console.log("Calling find child");
+                //console.log("Calling find child");
             }
 
             findChild(itm.children, findChildName, function (founditm, addAsChild) {
-                console.log("Add as child" + addAsChild);
+                //console.log("Add as child" + addAsChild);
                 callback(fullarray, founditm, addAsChild);
             });
         }
@@ -311,8 +305,7 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
     // process iterated item
     if (itemToProcess.node.substring(0, 1) == "=") {
         // command found at iterated item
-        console.log("processing " + itemToProcess.node);
-
+        //console.log("processing " + itemToProcess.node);
         var count = 0;
 
         var findAt = position.slice(0);
@@ -330,33 +323,33 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
         var childName = param.substring(count);
 
         if (count > 0) {
-            console.log("find " + findAt.join(",") + " " + childName);
-
+            //console.log("find " + findAt.join(",") + " " + childName);
             var foundCallback = function (array, foundItem, addAsChild) {
-                console.log(foundItem);
+                //console.log(foundItem);
                 if (addAsChild) {
-                    console.log("Adding found node as child");
+                    //console.log("Adding found node as child");
                     itemToProcess["replaceWithChildren"] = true;
 
                     if (!(itemToProcess.children)) {
-                        console.log("Adding children element");
+                        //console.log("Adding children element");
                         itemToProcess.children = [];
                     }
 
                     itemToProcess.children.push(foundItem);
                 } else {
                     itemToProcess.node = foundItem.node;
-                    console.log("Setting children and attributes from found node");
+
+                    //console.log("Setting children and attributes from found node");
                     if (foundItem.children) {
                         if (!(itemToProcess.children)) {
-                            console.log("Adding children element");
+                            //console.log("Adding children element");
                             itemToProcess.children = [];
                         }
                         itemToProcess.children = itemToProcess.children.concat(foundItem.children);
                     }
                     if (foundItem.attributes) {
                         if (!(itemToProcess.attributes)) {
-                            console.log("Adding attributes element");
+                            //console.log("Adding attributes element");
                             itemToProcess.attributes = [];
                         }
                         itemToProcess.attributes = itemToProcess.attributes.concat(foundItem.attributes);
@@ -369,8 +362,7 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
             var findIterator = createFindIterator(fullarray, findAt, childName, foundCallback);
 
             //console.log("find referenced node");
-            console.log("Now iterating");
-
+            //console.log("Now iterating");
             processArray(fullarray, fullarray, itemToProcess, [], findIterator);
         }
     }
@@ -388,63 +380,60 @@ function generate(param) {
     //if (parserFile.indexOf("./") != 0) parserFile = "./" + parserFile;
     //var parser = require(parserFile);
     var infile = (options.infile);
-    console.log("Parsing");
 
+    //console.log("Parsing");
     var fileAsString = fs.readFileSync(infile, "utf8").replace(/^\uFEFF/, '');
 
     var parser = napkinparser;
     var parsed = parser.parse(fileAsString);
 
-    console.log("Infile length: " + fileAsString.length);
-    console.log("Parsed to length: " + JSON.stringify(parsed).length);
-
+    //console.log("Infile length: " + fileAsString.length);
+    //console.log("Parsed to length: " + JSON.stringify(parsed).length);
     // process
     if (parsed.commands) {
-        console.log("Processing " + parsed.commands.length + " commands");
+        //console.log("Processing " + parsed.commands.length + " commands");
         var commands = parsed.commands.splice(0);
-        console.log(commands);
 
         for (var c in commands) {
             var cmd = commands[c];
 
-            console.log("Running command " + cmd.type);
-
+            //console.log("Running command " + cmd.type);
             if (cmd.type == "include" || cmd.type == "reference") {
                 var filename = cmd.attributes[0].attr;
-                console.log("Including " + filename);
 
+                //console.log("Including " + filename);
                 var included = generate(filename);
 
-                console.log("Concating");
-
+                //console.log("Concating");
                 if (included) {
-                    console.log("array " + included);
+                    //console.log("array " + included);
                     var arr = [];
                     for (var i = 0; i < included.length; i++) {
                         var item = included[i];
-                        console.log(item);
 
+                        //console.log(item);
                         item["included"] = cmd.type;
 
-                        console.log(item);
+                        //console.log(item);
                         arr.push(item);
                     }
 
-                    console.log(included);
-
+                    //console.log(included);
                     parsed.model = arr.concat(parsed.model);
                     //if (cmd.type == "include") {
                     //} else {
                     //    if (!(parsed["references"])) parsed["references"] = [];
                     //    parsed.references = parsed.references.concat(included);
                     //}
-                } else
-                    console.log("Empty");
+                }
+                //else
+                //console.log("Empty");
             }
 
             if (cmd.type == "map") {
                 var filename = cmd.attributes[0].attr;
-                console.log("Mapping " + filename);
+
+                //console.log("Mapping " + filename);
                 var req = require("./" + filename);
                 parsed.model = req(parsed.model);
             }
@@ -458,17 +447,16 @@ function generate(param) {
                     var filename = cmd.attributes[0].attr;
                     var type = cmd.attributes[1].attr;
 
-                    console.log("Creating " + type + " format");
-
+                    //console.log("Creating " + type + " format");
                     if (!parsed.processed) {
-                        console.log("Processing");
+                        //console.log("Processing");
                         parsed.processed = parsed.model.slice(0);
                         processAll(parsed.processed);
 
                         // remove referenced
                         var newChildArray = [];
                         for (var ii in parsed.processed) {
-                            console.log(parsed.processed[ii]);
+                            //console.log(parsed.processed[ii]);
                             if (!(parsed.processed[ii]["included"] && parsed.processed[ii]["included"] == "reference")) {
                                 newChildArray.push(parsed.processed[ii]);
                             }

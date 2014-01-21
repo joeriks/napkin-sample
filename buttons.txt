@@ -1,0 +1,15 @@
+Buttons
+
+	Start
+		Next
+		Cancel
+
+	Progress
+		Previous
+		Next
+		Cancel
+
+	Finish
+		Previous
+		Finish
+		Cancel

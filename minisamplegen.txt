@@ -1,23 +1,24 @@
 Test
-	A Yay
+	A Yayishh
 Project
 	Ref
-		A "multiline
-		yayaya
-		comment"
+		Comments "Multiline
+			comment
+			works"
 	Foo
 		Bar
-			"Comments like these"
-		A "multiline
-		yayaya
-		comment"
-		A Yay
+			"Comments can be inline aswell"
+		Comments "Multiline
+			comment
+			works"
+		A Yayishh
 		Include
 			This
 				Sample
 			That
 				Sample
 	Bar
+		"Includes comes from referenced file"
 		This
 			Sample
 		That
