@@ -172,6 +172,22 @@ The syntax for the map file is
 
 	module.exports = function(model) { /* do something */ return model; }
 
+Result out to json
+
+	/out "sample.json" "json"
+
+Result out to text
+
+	/out "sample.txt" "txt"
+
+Result out to xml nodes
+
+	/out "sample.xml" "xml"
+
+Result out to cs classes
+
+	/out "sample.cs" "cs"
+
 ##Generator Syntax
 
 	var r = require("./generator");
