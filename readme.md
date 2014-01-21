@@ -6,35 +6,43 @@ Human readable custom made syntax + code generation using project-custom string 
 
 Grunt runs the parser + generator and starts watching for changes of .txt files.
 
-The sample.txt contains:
+The acme_types.txt contains:
+
+
+	/reference "reference.txt" Ref
+	/out "acme.cs" "cs"
 
 	Acme
-			Project
-					Id key
-							"Identity"
-					Name
-							"Name of project"
-							"Helptext"
-					Address
-							"Full address"
-							"Street 123"
-					City
+
+		Client
+			Id i
+			=..References.Address._  
+
+			Projects "List<Project>" 
+
+		Project
+			Id i
+
+			Name
+				"Name of project"
+
+			=..References.Address._
 					
 
-Which parses to a json, and from there generates one cs and one html, based on easy to customise templates, to for example:
+Which parses to a json, and from there generates one cs and one html, based on built in, but to customise templates, to:
 
-	namespace Acme {        
-        public class Project { 
-			[DisplayName("Identity")]
+	namespace Acme {
+		public class Client {
 			public int Id {get;set;}
-			[DisplayName("Name of project")]
-			[DisplayHelp("Helptext")]
-			public string Name {get;set;}
-			[DisplayName("Full address")]
-			[DisplayHelp("Street 123")]
+			[Description("Full address")]
+			[Description("i.e. Street 123")]
 			public string Address {get;set;}
 			public string City {get;set;}
-        }					
+			public string ZipCode {get;set;}
+			[Description("Optional")]
+			public string Country {get;set;}
+			public List<Project> Projects {get;set;}
+		}
 					
 Article + video : http://joeriks.com/2014/01/14/a-simple-dsl-code-generation-using-node/
 
@@ -52,7 +60,7 @@ Article + video : http://joeriks.com/2014/01/14/a-simple-dsl-code-generation-usi
 
 General purpose easy to write and read object notation syntax
 
-###Version 0.03 - poc / demonstration / alpha / rfc
+###Version 0.045 - poc / demonstration / alpha / rfc
 
 Write text with tab indentations to define the objects
 
@@ -117,7 +125,32 @@ Attributes can also be strings
 	Node
 		ChildNode Name="Foo Bar"
 
-For comments use /* */
+
+Reference to copy node or all children
+
+	Parent
+		Foo
+			"Something"
+		Bar
+			Baz
+			Bah
+
+	Node
+		=.Parent.Foo
+
+		=.Parent.Bar._
+
+Multiline texts works
+
+	Parent
+		Foo
+			"Something
+			On
+			Several lines"
+
+Comments
+
+	/* For comments use */
 
 ###Include files and map the result with commands
 
@@ -126,6 +159,10 @@ If you use the generator you can run include and map commands.
 Include (and parse) another file. Result will be put on top of the existing file.
 
 	/include "main.txt"
+
+Reference (and parse) another file. Result will be available for reference instructions.
+
+	/reference "main.txt"
 
 Map the result through a javascript file.
 
