@@ -1,6 +1,6 @@
 #Napkin DSL + Code generation
 
-###Version 0.03 - poc / demonstration / alpha / rfc
+###Version 0.045 - poc / demonstration / alpha / rfc
 
 Human readable custom made syntax + code generation using project-custom string templates. Using Node and Npm packages. Most importantly PEGjs for parser generation. 
 
