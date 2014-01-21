@@ -14,24 +14,28 @@ The acme_types.txt contains:
 
 	Acme
 
-		Client
-			Id i
-			=..References.Address._  
-
-			Projects "List<Project>" 
-
 		Project
 			Id i
 
 			Name
 				"Name of project"
 
-			=..References.Address._
+		Client
+			Id i
+			=..References.Address._  
+
+			Projects "List<Project>" 
+
 					
 
 Which parses to a json, and from there generates one cs and one html, based on built in, but to customise templates, to:
 
 	namespace Acme {
+		public class Project {
+			public int Id {get;set;}
+			[Description("Name of project")]
+			public string Name {get;set;}
+		}
 		public class Client {
 			public int Id {get;set;}
 			[Description("Full address")]
@@ -43,6 +47,7 @@ Which parses to a json, and from there generates one cs and one html, based on b
 			public string Country {get;set;}
 			public List<Project> Projects {get;set;}
 		}
+
 					
 Article + video : http://joeriks.com/2014/01/14/a-simple-dsl-code-generation-using-node/
 
