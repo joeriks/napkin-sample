@@ -27,8 +27,7 @@ The acme_types.txt contains:
 			Projects "List<Project>" 
 
 					
-
-Which parses to a json, and from there generates one cs and one html, based on built in, but to customise templates, to:
+Which parses to a javascript object, and from there generates a cs (based on the "out" command), based on built in easy to customise templates, to:
 
 	namespace Acme {
 		public class Project {
