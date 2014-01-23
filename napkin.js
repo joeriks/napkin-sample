@@ -15,6 +15,57 @@ function repeat(pattern, count) {
     return result;
 }
 
+function processNodes(iterator) {
+    if (!(iterator.nodes))
+        return false;
+
+    if (typeof iterator.level == "undefined")
+        iterator.level = 0;
+    else
+        iterator.level += 1;
+    if (typeof iterator.index == "undefined")
+        iterator.index = 0;
+
+    iterator.currentNode = iterator.nodes[iterator.index];
+
+    if (typeof iterator.processChildren == "undefined")
+        iterator.processChildren = function (processors) {
+            var childIterator = JSON.parse(JSON.stringify(iterator));
+            childIterator.nodes = iterator.currentNode.children;
+
+            childIterator.parent = iterator;
+            if (typeof processors != "undefined")
+                childIterator.processors = processors;
+            return exports.processNodes(childIterator);
+        };
+
+    for (var index in iterator.nodes) {
+        iterator.index = index;
+
+        for (var p in iterator.processors) {
+            var processor = iterator.processors[p];
+
+            var result = processor(iterator);
+
+            if (result)
+                return true;
+        }
+    }
+
+    return false;
+}
+exports.processNodes = processNodes;
+function write(iterator) {
+    var s = "";
+    for (var i = 0; i < iterator.level; i++)
+        s += "\t";
+    console.log(iterator.level + " " + iterator.index);
+    console.log(s + iterator.currentNode.node);
+
+    return iterator.processChildren();
+}
+exports.write = write;
+
 function genericprocessor(pre, hasChildren, post) {
     var buffer = "";
     var write = function (text) {
@@ -382,10 +433,15 @@ function generate(param) {
     var infile = (options.infile);
 
     //console.log("Parsing");
-    var fileAsString = fs.readFileSync(infile, "utf8").replace(/^\uFEFF/, '');
+    var textToParse;
+
+    if (options.textToParse)
+        textToParse = options.textToParse;
+    else
+        textToParse = fs.readFileSync(infile, "utf8").replace(/^\uFEFF/, ''); // remove bom
 
     var parser = napkinparser;
-    var parsed = parser.parse(fileAsString);
+    var parsed = parser.parse(textToParse);
 
     //console.log("Infile length: " + fileAsString.length);
     //console.log("Parsed to length: " + JSON.stringify(parsed).length);
@@ -510,6 +566,8 @@ function generate(param) {
 //    console.log("Created " + options.out);
 //}
 module.exports = {
+    processNodes: exports.processNodes,
+    write: exports.write,
     generate: generate,
     parser: napkinparser,
     asTags: generateTags,
