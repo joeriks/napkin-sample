@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "napkin-sample", "napkin-sample.njsproj", "{AC0FC3EE-E80E-4C81-BF48-0BF92F215BCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "napkin", "..\napkin\napkin.csproj", "{DC195FC2-ECB1-4BA5-AE7A-C01C0FFD6D6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "napkin-tests", "..\napkin-tests\napkin-tests.csproj", "{541C31EA-9ECA-4C24-91D3-BEA544B6C439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DC195FC2-ECB1-4BA5-AE7A-C01C0FFD6D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC195FC2-ECB1-4BA5-AE7A-C01C0FFD6D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC195FC2-ECB1-4BA5-AE7A-C01C0FFD6D6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541C31EA-9ECA-4C24-91D3-BEA544B6C439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541C31EA-9ECA-4C24-91D3-BEA544B6C439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541C31EA-9ECA-4C24-91D3-BEA544B6C439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541C31EA-9ECA-4C24-91D3-BEA544B6C439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

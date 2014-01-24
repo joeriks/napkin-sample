@@ -13,6 +13,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     var napkin = require("./napkin");
+    require("./napkin-generator-cs");
+    require("./napkin-generator-text");
+    
     var changedFiles = [];
     grunt.event.on('watch', function(action, filepath) {
         console.log("File " + filepath + " " + action);
