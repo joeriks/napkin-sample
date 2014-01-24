@@ -9,7 +9,6 @@ function processAll(array) {
 }
 
 function processArray(fullarray, childarray, parentNode, position, iteratorCallback) {
-    //if (parentNode) console.log(parentNode.node);
     var localposition = 0;
     for (var i in childarray) {
         var currentNode = childarray[i];
@@ -50,12 +49,9 @@ function findChild(array, findChildName, callback) {
     var found = false;
 
     for (var i in array) {
-        //console.log("looking at " + array[i].node + " for " + find.head);
         var lookAtNode = array[i];
         if (lookAtNode.node == find.head) {
-            //console.log("Found head " + find.head + " now looking for " + ((find.tail) ? find.tail : "attributes"));
             if (find.tail != "") {
-                //console.log("found, continuing");
                 var children = lookAtNode.children;
                 if (children)
                     if (find.tail != "_") {
@@ -67,8 +63,6 @@ function findChild(array, findChildName, callback) {
                         }
                     }
             } else {
-                //console.log("found");
-                //console.log(array[i]);
                 callback(lookAtNode, false);
             }
         }
@@ -83,20 +77,15 @@ function createFindIterator(fullarray, findAt, findChildName, callback) {
 
         var found = (pos === find);
 
-        //console.log("looking at " + pos + " for " + find + " and name " + findChildName);
         if (position.length == 1 && find == "") {
-            // top level search
             var headTail = splitHeadTail(findChildName, ".");
 
-            //console.log("same level lookup for " + headTail.head);
-            //console.log("checking " + itm.node);
             if (itm.node == headTail.head && headTail.tail == "_") {
                 for (var i in itm.children) {
                     callback(fullarray, itm.children[i], true);
                 }
             }
             if (itm.node == headTail.head && headTail.tail == "") {
-                // add as child
                 callback(fullarray, itm, true);
             }
 
@@ -104,26 +93,15 @@ function createFindIterator(fullarray, findAt, findChildName, callback) {
                 found = true;
                 findChildName = headTail.tail;
             }
-            //    if (itm.node == headTail.head) {
-            //        found = true;
-            //        findChildName = headTail.tail;
-            //    }
-            //    if (headTail.tail = "_") {
-            //        found = true;
-            //        findChildName = "_";
-            //    }
         }
 
         if (found) {
-            //console.log("found parent " + itm.node + ((findChildName) ? " now looking for " + findChildName : ""));
             if (findChildName == "") {
                 callback(fullarray, itm, false);
             } else {
-                //console.log("Calling find child");
             }
 
             findChild(itm.children, findChildName, function (founditm, addAsChild) {
-                //console.log("Add as child" + addAsChild);
                 callback(fullarray, founditm, addAsChild);
             });
         }
@@ -132,10 +110,7 @@ function createFindIterator(fullarray, findAt, findChildName, callback) {
 ;
 
 function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
-    // process iterated item
     if (itemToProcess.node.substring(0, 1) == "=") {
-        // command found at iterated item
-        //console.log("processing " + itemToProcess.node);
         var count = 0;
 
         var findAt = position.slice(0);
@@ -153,15 +128,11 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
         var childName = param.substring(count);
 
         if (count > 0) {
-            //console.log("find " + findAt.join(",") + " " + childName);
             var foundCallback = function (array, foundItem, addAsChild) {
-                //console.log(foundItem);
                 if (addAsChild) {
-                    //console.log("Adding found node as child");
                     itemToProcess["replaceWithChildren"] = true;
 
                     if (!(itemToProcess.children)) {
-                        //console.log("Adding children element");
                         itemToProcess.children = [];
                     }
 
@@ -169,17 +140,14 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
                 } else {
                     itemToProcess.node = foundItem.node;
 
-                    //console.log("Setting children and attributes from found node");
                     if (foundItem.children) {
                         if (!(itemToProcess.children)) {
-                            //console.log("Adding children element");
                             itemToProcess.children = [];
                         }
                         itemToProcess.children = itemToProcess.children.concat(foundItem.children);
                     }
                     if (foundItem.attributes) {
                         if (!(itemToProcess.attributes)) {
-                            //console.log("Adding attributes element");
                             itemToProcess.attributes = [];
                         }
                         itemToProcess.attributes = itemToProcess.attributes.concat(foundItem.attributes);
@@ -191,8 +159,6 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
 
             var findIterator = createFindIterator(fullarray, findAt, childName, foundCallback);
 
-            //console.log("find referenced node");
-            //console.log("Now iterating");
             processArray(fullarray, fullarray, itemToProcess, [], findIterator);
         }
     }
