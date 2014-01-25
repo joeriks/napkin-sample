@@ -259,6 +259,9 @@ function runCommands(objectToParse) {
 }
 
 function parseString(textToParse, doRunCommands) {
+    if (typeof doRunCommands == "undefined")
+        doRunCommands = true;
+
     var parsed = napkinparser.parse(textToParse);
 
     if (doRunCommands)
@@ -269,6 +272,9 @@ function parseString(textToParse, doRunCommands) {
 exports.parseString = parseString;
 
 function parseFile(filename, doRunCommands) {
+    if (typeof doRunCommands == "undefined")
+        doRunCommands = true;
+
     var textToParse = fs.readFileSync(filename, "utf8").replace(/^\uFEFF/, '');
 
     return exports.parseString(textToParse, doRunCommands);

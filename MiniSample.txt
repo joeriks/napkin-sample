@@ -1,6 +1,6 @@
 ﻿/reference "include.txt"
 /out "minisamplegen.txt" "text"
-/out "minisamplegen.json" "json"
+/out "minisamplegen.cs" "cs"
 
 Test
 	u "Yayishgh" h

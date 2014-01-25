@@ -29,7 +29,7 @@ module.exports = function (grunt) {
             for(var i = changedFiles.length - 1; i >= 0; i--) {
                 
                 var filename = changedFiles[i].file;
-                napkin.generate(filename);
+                napkin.parseFile(filename, true);
                 changedFiles.splice(i, 1);
             }
 
