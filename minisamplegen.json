@@ -1,0 +1,107 @@
+[
+  {
+    "node": "Test",
+    "children": [
+      {
+        "node": "u",
+        "attributes": [
+          {
+            "attr": "Yayishgh"
+          },
+          {
+            "attr": "h"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "node": "Project",
+    "children": [
+      {
+        "node": "Ref",
+        "children": [
+          {
+            "node": "Comments",
+            "attributes": [
+              {
+                "attr": "Multiline\r\n\t\t\tcomment\r\n\t\t\tworks"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "node": "Foo",
+        "children": [
+          {
+            "node": "Bar",
+            "children": [
+              {
+                "node": "Comments can be inline aswell"
+              }
+            ]
+          },
+          {
+            "node": "Comments",
+            "attributes": [
+              {
+                "attr": "Multiline\r\n\t\t\tcomment\r\n\t\t\tworks"
+              }
+            ],
+            "processed": ".Ref.Comments"
+          },
+          {
+            "node": "=..Test.A"
+          },
+          {
+            "node": "Include",
+            "children": [
+              {
+                "node": "This",
+                "children": [
+                  {
+                    "node": "Sample"
+                  }
+                ]
+              },
+              {
+                "node": "That",
+                "children": [
+                  {
+                    "node": "Sample"
+                  }
+                ]
+              }
+            ],
+            "included": "reference"
+          }
+        ]
+      },
+      {
+        "node": "Bar",
+        "children": [
+          {
+            "node": "Includes comes from referenced file"
+          },
+          {
+            "node": "This",
+            "children": [
+              {
+                "node": "Sample"
+              }
+            ]
+          },
+          {
+            "node": "That",
+            "children": [
+              {
+                "node": "Sample"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

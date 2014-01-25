@@ -1,4 +1,4 @@
-var traverse = require("traverse");
+﻿var traverse = require("traverse");
 var napkin = require("./napkin");
 
 napkin.addGenerator("text", function (obj) {
@@ -9,7 +9,7 @@ napkin.addGenerator("text", function (obj) {
         } else if (typeof node == 'object') {
             this.before(function () {
                 if (node.node) {
-                    s += Array(this.level + 1).join("\t") + node.node + "\n";
+                    s += Array(Math.floor(this.level / 2)).join("\t") + node.node + "\n";
                 }
             });
         } else if (typeof node == 'string') {

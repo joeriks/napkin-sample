@@ -190,7 +190,7 @@ function generate(objectToParse, type) {
 exports.generate = generate;
 
 function runCommands(objectToParse) {
-    function cmd_include(filename) {
+    function cmd_include(filename, type) {
         var included = exports.parseFile(filename, false);
 
         if (included) {
@@ -198,7 +198,7 @@ function runCommands(objectToParse) {
             for (var i = 0; i < included.length; i++) {
                 var item = included[i];
 
-                item["included"] = cmd.type;
+                item["included"] = type;
 
                 arr.push(item);
             }
@@ -219,15 +219,20 @@ function runCommands(objectToParse) {
 
             var newChildArray = [];
             for (var ii in objectToParse.processed) {
-                if (!(objectToParse.processed[ii]["included"] && objectToParse.processed[ii]["included"] == "reference")) {
+                var node = objectToParse.processed[ii];
+                if (!(node["included"] && node["included"] == "reference")) {
                     newChildArray.push(objectToParse.processed[ii]);
+                } else {
+                    console.log("excluded " + node.node);
                 }
             }
 
             objectToParse.processed = newChildArray;
         }
 
-        var formatted = exports.generate(objectToParse, type);
+        var formatted = exports.generate(objectToParse.processed, type);
+
+        fs.writeFileSync(filename, formatted);
     }
 
     if (objectToParse.commands) {
@@ -237,7 +242,7 @@ function runCommands(objectToParse) {
             var cmd = commands[c];
 
             if (cmd.type == "include" || cmd.type == "reference")
-                cmd_include(cmd.attributes[0].attr);
+                cmd_include(cmd.attributes[0].attr, cmd.type);
 
             if (cmd.type == "map")
                 cmd_map(cmd.attributes[0].attr);
