@@ -67,25 +67,34 @@ napkin.addGenerator("html", function (obj) {
                 }
             }
 
-            if (this.level==1 && node.name=="_") {
+            //s+= node.name + "," + this.level + "\n";
+            
+            if (this.level==1 && node.name=="/def" && node.children) {
+                //s+= "def header" + node.name + "\n";
+                node.isCommand = true;
+                for (var i in node.children) {
 
-                if (node.attributes[0]=="hidecomments") {
-                    settings.hidecomments = true;
-                }
-                if (node.attributes[0]=="showcomments") {
-                    settings.hidecomments = false;
+                    var definitionNode = node.children[i];
+                    //s+= "added def " + definitionNode.name + "\n";
+
+                    if (definitionNode.name=="hidecomments") {
+                        settings.hidecomments = true;
+                    } else if (definitionNode.name=="showcomments") {
+                        settings.hidecomments = false;
+                    } else {
+                        definitions[definitionNode.name] = definitionNode.attributes;
+                    }
+                    
+                    definitionNode.isCommand = true;
+
                 }
 
-                //s +="def " + node.attributes.join(",") + " added\n";
-                if (node.attributes) {
-                        definitions[node.attributes[0]] = node.attributes.slice(1);
-                }
             }
 
             //tagname = this.level;//  + definitions[this.level];
 
             this.before(function () {
-                if (node.name && node.name!="_") {
+                if (node.name && !node.isCommand) {
                     s += tabs(this.level);
                     //s += definitions.join(",");
                     //s += definitions[this.level];

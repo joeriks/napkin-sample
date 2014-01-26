@@ -1,21 +1,23 @@
 ﻿/out "onefilehtmlsampleout.html"
-
 /** Definitions by tab level */
-_ 1 h2 strong
-_ 2 p
-_ 3 div
+/def
+	1 h2 strong
+	2 p
+	3 div
 
 /** Definitiongs by name */
-_ B p strong 
+/def
+	B p strong 
 
 /** Actual content */
-Some headdder htmsls
+Some headerf
 	Some texts 
 		Some more info
 		And even more
 
 /** Redefine definition */
-_ 1 h1
+/def
+	1 h1
 
 Some other header
 

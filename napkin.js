@@ -214,7 +214,7 @@ function runCommands(objectToParse) {
     }
 
     function cmd_out(filename, type) {
-        if (typeof type == "undefined" || type == null) {
+        if (!type) {
             type = path.extname(filename);
             if (type.indexOf(".") == 0)
                 type = type.substring(1);
@@ -249,7 +249,14 @@ function runCommands(objectToParse) {
                 item.isCommand = true;
 
                 if (item.name == "/out") {
-                    cmd_out(item.attributes[0], item.attributes[1] || null);
+                    var type = (item.attributes.length > 1) ? item.attributes[1] : "";
+                    cmd_out(item.attributes[0], type);
+                }
+                if (item.name == "/reference") {
+                    cmd_include(item.attributes[0], "reference");
+                }
+                if (item.name == "/include") {
+                    cmd_include(item.attributes[0], "include");
                 }
             }
         }
