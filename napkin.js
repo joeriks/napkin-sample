@@ -1,7 +1,8 @@
-console.log("v 0.051");
+console.log("v 0.061");
 
 var fs = require("fs");
-var napkinparser = require("./napkinparser");
+var path = require("path");
+var napkinparser = require("./napkinparser_simplified");
 var traverse = require("traverse");
 
 function processAll(array) {
@@ -50,7 +51,7 @@ function findChild(array, findChildName, callback) {
 
     for (var i in array) {
         var lookAtNode = array[i];
-        if (lookAtNode.node == find.head) {
+        if (lookAtNode.name == find.head) {
             if (find.tail != "") {
                 var children = lookAtNode.children;
                 if (children)
@@ -110,13 +111,13 @@ function createFindIterator(fullarray, findAt, findChildName, callback) {
 ;
 
 function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
-    if (itemToProcess.node.substring(0, 1) == "=") {
+    if (itemToProcess.name.substring(0, 1) == "=") {
         var count = 0;
 
         var findAt = position.slice(0);
         findAt.pop();
 
-        var param = itemToProcess.node.substring(1);
+        var param = itemToProcess.name.substring(1);
         for (var i = 0; i < param.length; i++) {
             if (param.substring(i, i + 1) == ".") {
                 count++;
@@ -138,7 +139,7 @@ function processIteratedItem(fullarray, position, itemToProcess, parentNode) {
 
                     itemToProcess.children.push(foundItem);
                 } else {
-                    itemToProcess.node = foundItem.node;
+                    itemToProcess.name = foundItem.name;
 
                     if (foundItem.children) {
                         if (!(itemToProcess.children)) {
@@ -203,19 +204,26 @@ function runCommands(objectToParse) {
                 arr.push(item);
             }
 
-            objectToParse.model = arr.concat(objectToParse.model);
+            objectToParse.document = arr.concat(objectToParse.document);
         }
     }
 
     function cmd_map(filename) {
         var req = require("./" + filename);
-        objectToParse.model = req(objectToParse.model);
+        objectToParse = req(objectToParse);
     }
 
     function cmd_out(filename, type) {
+        if (typeof type == "undefined" || type == null) {
+            type = path.extname(filename);
+            if (type.indexOf(".") == 0)
+                type = type.substring(1);
+            else
+                type = "text";
+        }
+
         if (!objectToParse.processed) {
-            objectToParse.processed = objectToParse.model.slice(0);
-            processAll(objectToParse.processed);
+            objectToParse.processed = objectToParse.document.slice(0);
 
             var newChildArray = [];
             for (var ii in objectToParse.processed) {
@@ -223,7 +231,7 @@ function runCommands(objectToParse) {
                 if (!(node["included"] && node["included"] == "reference")) {
                     newChildArray.push(objectToParse.processed[ii]);
                 } else {
-                    console.log("excluded " + node.node);
+                    console.log("excluded " + node.name);
                 }
             }
 
@@ -235,25 +243,17 @@ function runCommands(objectToParse) {
         fs.writeFileSync(filename, formatted);
     }
 
-    if (objectToParse.commands) {
-        var commands = objectToParse.commands.splice(0);
+    traverse(objectToParse.document).forEach(function on_item(item) {
+        if (item.name) {
+            if (item.name.indexOf("/") == 0) {
+                item.isCommand = true;
 
-        for (var c in commands) {
-            var cmd = commands[c];
-
-            if (cmd.type == "include" || cmd.type == "reference")
-                cmd_include(cmd.attributes[0].attr, cmd.type);
-
-            if (cmd.type == "map")
-                cmd_map(cmd.attributes[0].attr);
-
-            if (cmd.type == "processall")
-                processAll(objectToParse.model);
-
-            if (cmd.type == "out")
-                cmd_out(cmd.attributes[0].attr, (cmd.attributes.length > 1) ? cmd.attributes[1].attr : "text");
+                if (item.name == "/out") {
+                    cmd_out(item.attributes[0], item.attributes[1] || null);
+                }
+            }
         }
-    }
+    });
 
     return objectToParse;
 }
@@ -267,7 +267,7 @@ function parseString(textToParse, doRunCommands) {
     if (doRunCommands)
         runCommands(parsed);
 
-    return parsed.model;
+    return parsed.document;
 }
 exports.parseString = parseString;
 
