@@ -1,27 +1,46 @@
-﻿/out "onefilehtmlsampleout.html"
+﻿/out onefilehtmlsampleout.html
+/reference reference.txt
+
+/** Definitions from ref */
+/def 
+	=reference._
+
 /** Definitions by tab level */
 /def
-	1 h2 strong
-	2 p
-	3 div
 
+	1 h1
+	2 "<p class='bababa'>{{name}}{{renderChildren}}</p>"
+	3 "<p>{{name}}</p>{% if children%}
+		<ul>{%for ch in children%}
+		<li>{{ch.name}}</li>{%endfor%}
+		</ul>{%endif%}"
+	
+		
 /** Definitiongs by name */
 /def
-	B p strong 
+	_ p bold 
+	__ p bolder
 
 /** Actual content */
-Some headerf
-	Some texts 
+Some header
+	Some text
 		Some more info
 		And even more
+			Foo
+			Bar
+			Baz
+			
+	Some other text
+	__ Some special styled thing
 
 /** Redefine definition */
 /def
-	1 h1
+	1 h1 baz
+	__ p bang
 
 Some other header
-
-B Some special styled thing
+_ Some special styled thing
+__ Some special styled thing
 
 	/* This comment goes to the html
 

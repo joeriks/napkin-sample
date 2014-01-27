@@ -249,8 +249,7 @@ function runCommands(objectToParse) {
                 item.isCommand = true;
 
                 if (item.name == "/out") {
-                    var type = (item.attributes.length > 1) ? item.attributes[1] : "";
-                    cmd_out(item.attributes[0], type);
+                    cmd_out(item.attributes[0]);
                 }
                 if (item.name == "/reference") {
                     cmd_include(item.attributes[0], "reference");
